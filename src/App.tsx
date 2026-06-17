@@ -1,6 +1,7 @@
-import { Text, Flex, Box } from '@chakra-ui/react'
+import { Text, Flex, Box, Center } from '@chakra-ui/react'
 import { ParticleLayer } from './components/bg/ParticleLayer'
 import GradientLayer from './components/bg/GradientLayer'
+import MobileFrame from './components/util/MobileFrame'
 
 function App() {
 
@@ -11,14 +12,17 @@ function App() {
         h={"100vh"}
     >
         <GradientLayer />
-        <ParticleLayer />
-        <Flex
-            w={"100%"}
-            h={"100%"}
+        <Center
+            position={"absolute"}
+            inset={0}
             flexDirection={"column"}
         >
+            <MobileFrame
+                children={<></>}
+            />
+        </Center>
+        <ParticleLayer />
 
-        </Flex>
     </Box>
   )
 }

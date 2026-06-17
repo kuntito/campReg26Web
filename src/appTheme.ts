@@ -3,11 +3,11 @@ import { extendTheme } from "@chakra-ui/react"
 const colors = {
     palette: {
         platform: '#F9F9F9',
-        colorRoom: '#1E2A49',
-        colorVenue: '#E36255',
-        colorBranch: '#D9D9D9',
-        colorLife: '#FFFFFF',
-        colorRaze: '#68B439',
+        room: '#1E2A49',
+        venue: '#E36255',
+        branch: '#D9D9D9',
+        life: '#FFFFFF',
+        raze: '#68B439',
     }
 }
 

@@ -6,7 +6,6 @@ const GradientLayer = () => {
             position="absolute"
             inset={0}
             bgGradient="linear(to-b, #939393, #F9F9F9)"
-            zIndex={0}
         />
     )
 }
