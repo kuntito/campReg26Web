@@ -40,3 +40,9 @@ export default defineConfig({
 
 +   run server with:
     `npm run dev`
+
+
+** MISC DEPENDENCIES **
+
++   for particle layer
+    `npm install @tsparticles/react@3.0.0 @tsparticles/engine@3.9.1 @tsparticles/slim@3.9.1`
