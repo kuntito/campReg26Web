@@ -1,4 +1,4 @@
-import useSanitizedInput from "../hooks/useSanitizedInput";
+import useSanitizedInput from "../../../hooks/useSanitizedInput";
 import LabelAndInput from "./LabelAndInput";
 
 interface NameInputProps {

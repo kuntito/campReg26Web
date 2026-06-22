@@ -1,4 +1,5 @@
 import { envConfig } from "../config/envConfig";
+import { GetRegDropdownsResponse } from "./getRegDropdowns/getRegDropdowns.types";
 
 const BASE_URL = envConfig.VITE_YC26_API_BASE_URL;
 const yc26ApiClient = {

@@ -10,6 +10,8 @@ interface Props {
     onChange: (
         e: React.ChangeEvent<HTMLInputElement>
     ) => void;
+    onBlur?: () => void;
+    isInvalid?: boolean;
 }
 
 
@@ -18,6 +20,8 @@ const LabelAndInput = ({
     value,
     placeholder,
     onChange,
+    onBlur,
+    isInvalid,
 }: Props) => {
 
     const [isInputFocused, setInputFocused ] = useState(false);
@@ -39,7 +43,11 @@ const LabelAndInput = ({
                 onChange={onChange}
                 placeholder={isInputFocused ? placeholder : ""}
                 onFocus={() => setInputFocused(true)}
-                onBlur={() => setInputFocused(false)}
+                onBlur={() => {
+                    setInputFocused(false);
+                    onBlur?.();
+                }}
+                isInvalid={isInvalid}
             />
         </VStack>
     )

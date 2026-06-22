@@ -17,6 +17,10 @@ const AppButton = ({ ...buttonProps }: Props) => {
                 opacity: 0.5,
             }}
             flexShrink={0}
+            _disabled={{
+                opacity: 0.4,
+                cursor: "not-allowed",
+            }}
             {...buttonProps} 
         />
     );

@@ -8,12 +8,14 @@ export interface DropdownOption {
 
 interface Props {
     label: string;
+    floatingLabel: string;
     options: DropdownOption[];
     onSelect: (id: number) => void;
 }
 
 const DropdownField = ({
     label,
+    floatingLabel,
     options,
     onSelect
 }: Props) => {
@@ -65,7 +67,7 @@ const DropdownField = ({
                         color={"palette.room"}
                         textShadow="0px 1px 2px rgba(0,0,0,0.3)"
                     >
-                        {label}
+                        {floatingLabel}
                     </Text>
                 </Box>
             )}

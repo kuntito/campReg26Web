@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import useAppStore from "../state-mgmt/appStore";
 import CenterSpinner from "./util/CenterSpinner";
-import RegistrationForm from "./RegistrationForm";
+import RegistrationForm from "./registration-form/RegistrationForm";
 
 const AppContent = () => {
     const regDropdownsState = useAppStore(s => s.regDropdownsState);
