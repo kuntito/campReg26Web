@@ -4,11 +4,11 @@ const colors = {
     palette: {
         platform: '#F9F9F9',
         room: '#1E2A49',
-        roomAlpha: '#1E2A4999', // 99 is 50% opacity
+        roomAlpha: '#1E2A4999', // 99 is 60% opacity
         venue: '#E36255',
         branch: '#D9D9D9',
         life: '#FFFFFF',
-        lifeAlpha: '#FFFFFF99', // 99 is 50% opacity
+        lifeAlpha: '#FFFFFFCC', // CC is 80% opacity
         raze: '#68B439',
     }
 }
