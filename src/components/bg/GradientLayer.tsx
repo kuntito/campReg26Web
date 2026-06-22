@@ -1,10 +1,13 @@
-import { Box } from "@chakra-ui/react"
+import { Box, BoxProps } from "@chakra-ui/react"
 
-const GradientLayer = () => {
+interface Props extends BoxProps {
+
+}
+
+const GradientLayer = ({ ...boxProps }) => {
     return (
         <Box
-            position="absolute"
-            inset={0}
+            {...boxProps}
             bgGradient="linear(to-b, #939393, #F9F9F9)"
         />
     )

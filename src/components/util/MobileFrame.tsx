@@ -1,7 +1,7 @@
 import { Center } from "@chakra-ui/react";
 
 interface MobileFrameProps {
-    children: React.ReactNode;
+    children?: React.ReactNode;
 }
 
 const MobileFrame = ({
