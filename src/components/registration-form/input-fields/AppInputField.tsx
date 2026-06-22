@@ -14,7 +14,7 @@ const AppInputField = ({
             _focus={{ 
                 bg: "palette.life",
                 boxShadow: "none",
-                borderColor: "palette.roomAlpha",
+                borderColor: "palette.room",
                 borderWidth: "2px"
             }}
             _placeholder={{
