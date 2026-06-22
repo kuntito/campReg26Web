@@ -14,6 +14,7 @@ const MobileFrame = ({
         borderColor={"palette.branch"}
         borderRadius={"16px"}
         boxShadow={"sm"}
+        overflow={"hidden"}
     >
         {children}
     </Center>;

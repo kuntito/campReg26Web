@@ -1,5 +1,5 @@
 import { useToast } from "@chakra-ui/react";
-import appToastConfig from "../../config/toastConfig";
+import appToastConfig from "../config/toastConfig";
 
 interface SanitizedInputConfig {
     regex: RegExp;

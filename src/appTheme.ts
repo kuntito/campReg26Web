@@ -8,20 +8,29 @@ const colors = {
         venue: '#E36255',
         branch: '#D9D9D9',
         life: '#FFFFFF',
-        lifeAlpha: '#FFFFFFCC', // CC is 80% opacity
+        lifeAlpha: '#FFFFFFE6', // CC is 80% opacity
         raze: '#68B439',
     }
 }
 
-const fontSizes = {
-    blaze: "24px",
-    orion: "16px",
-    hush: "12px",
+const textStyles = {
+    blaze: {
+        fontSize: "24px",
+        fontWeight: "normal",
+    },
+    orion: {
+        fontSize: "16px",
+        fontWeight: "normal",
+    },
+    hush: {
+        fontSize: "12px",
+        fontWeight: "normal",
+    }
 }
 
 const appTheme = extendTheme({
     colors,
-    fontSizes,
+    textStyles,
     styles: {
         global: {
             body: {
