@@ -81,33 +81,6 @@ const RegFormContent = ({
             <VStack
                 gap={"12px"}
             >
-                <DropdownField 
-                    label="your unit"
-                    floatingLabel="unit"
-                    options={dropdownOptions.units.map((u) => ({
-                        id: u.unitId,
-                        label: u.unitName,
-                    }))}
-                    onSelect={(id) => handleRegDataChange("unitId")(id)}
-                />
-                <DropdownField 
-                    label="your fellowship"
-                    floatingLabel="fellowship"
-                    options={dropdownOptions.fellowships.map((f) => ({
-                        id: f.fellowshipId,
-                        label: f.fellowshipName,
-                    }))}
-                    onSelect={(id) => handleRegDataChange("fellowshipId")(id)}
-                />
-                <DropdownField 
-                    label="your branch"
-                    floatingLabel="branch"
-                    options={dropdownOptions.branches.map((b) => ({
-                        id: b.branchId,
-                        label: b.branchName,
-                    }))}
-                    onSelect={(id) => handleRegDataChange("branchId")(id)}
-                />
                 <DropdownField
                     label="your gender"
                     floatingLabel="gender"
@@ -119,6 +92,33 @@ const RegFormContent = ({
                         label: s,
                     }))}
                     onSelect={(id) => handleRegDataChange("sex")(dropdownOptions.sex[id])}
+                />
+                <DropdownField 
+                    label="your branch"
+                    floatingLabel="branch"
+                    options={dropdownOptions.branches.map((b) => ({
+                        id: b.branchId,
+                        label: b.branchName,
+                    }))}
+                    onSelect={(id) => handleRegDataChange("branchId")(id)}
+                />
+                <DropdownField 
+                    label="your fellowship"
+                    floatingLabel="fellowship"
+                    options={dropdownOptions.fellowships.map((f) => ({
+                        id: f.fellowshipId,
+                        label: f.fellowshipName,
+                    }))}
+                    onSelect={(id) => handleRegDataChange("fellowshipId")(id)}
+                />
+                <DropdownField 
+                    label="your unit"
+                    floatingLabel="unit"
+                    options={dropdownOptions.units.map((u) => ({
+                        id: u.unitId,
+                        label: u.unitName,
+                    }))}
+                    onSelect={(id) => handleRegDataChange("unitId")(id)}
                 />
             </VStack>
             <AppButton
