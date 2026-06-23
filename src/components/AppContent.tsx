@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import useAppStore from "../state-mgmt/appStore";
 import CenterSpinner from "./util/CenterSpinner";
 import RegistrationForm from "./registration-form/RegistrationForm";
+import ActionRefetchForm from "./registration-form/ActionRefetchForm";
 
 const AppContent = () => {
     const regDropdownsState = useAppStore(s => s.regDropdownsState);
@@ -10,8 +11,10 @@ const AppContent = () => {
         fetchRegDropdowns();
     }, [])
     
+    if (regDropdownsState.kind === 'idle') return null;
     if (regDropdownsState.kind === 'fetching') return <CenterSpinner />;
-    if (regDropdownsState.kind !== 'success') return null;
+    if (regDropdownsState.kind === 'error') return <ActionRefetchForm />
+
 
     return (
         <RegistrationForm 

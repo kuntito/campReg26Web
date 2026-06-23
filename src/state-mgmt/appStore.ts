@@ -35,8 +35,6 @@ const useAppStore = create<appStore>((set) => {
         const res = await yc26DataSource.getRegDropdowns();
 
         if (res == null || !res.success) {
-            // TODO, i want to auto refetch here
-            // is axios overkill?
             set({
                 regDropdownsState: { kind: 'error' }
             });

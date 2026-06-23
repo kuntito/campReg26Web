@@ -14,7 +14,7 @@ interface Props {
 
 const RegFormContent = ({
     dropdownOptions,
-}: Props) => {
+}: Props) => {    
     const [regData, setRegData] = useState<RegistrationData>({
         firstName: "",
         lastName: "",
@@ -94,15 +94,6 @@ const RegFormContent = ({
                     onSelect={(id) => handleRegDataChange("sex")(dropdownOptions.sex[id])}
                 />
                 <DropdownField 
-                    label="your branch"
-                    floatingLabel="branch"
-                    options={dropdownOptions.branches.map((b) => ({
-                        id: b.branchId,
-                        label: b.branchName,
-                    }))}
-                    onSelect={(id) => handleRegDataChange("branchId")(id)}
-                />
-                <DropdownField 
                     label="your fellowship"
                     floatingLabel="fellowship"
                     options={dropdownOptions.fellowships.map((f) => ({
@@ -110,6 +101,15 @@ const RegFormContent = ({
                         label: f.fellowshipName,
                     }))}
                     onSelect={(id) => handleRegDataChange("fellowshipId")(id)}
+                />
+                <DropdownField 
+                    label="your branch"
+                    floatingLabel="branch"
+                    options={dropdownOptions.branches.map((b) => ({
+                        id: b.branchId,
+                        label: b.branchName,
+                    }))}
+                    onSelect={(id) => handleRegDataChange("branchId")(id)}
                 />
                 <DropdownField 
                     label="your unit"
