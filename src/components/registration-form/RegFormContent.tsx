@@ -4,8 +4,8 @@ import { RegistrationData } from "../../models";
 import AppButton from "../util/AppButton";
 import DropdownField from "./input-fields/DropdownField";
 import EmailInputField from "./input-fields/EmailInputField";
-import { RegDropdownOptions } from "../../state-mgmt/appStore";
 import NameInputField from "./input-fields/NameInputField";
+import { RegDropdownOptions } from "../../state-mgmt/slices/regFormSlice";
 
 
 interface Props {
