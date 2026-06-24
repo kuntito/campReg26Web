@@ -6,6 +6,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import useAppStore from '../state-mgmt/appStore';
 import { useEffect, useState } from 'react';
 import RegSuccessDialog from './registration-form/RegSuccessDialog';
+import { RegisteredCamperDetails } from '../apiClient/registerCamper/registerCamper.types';
 
 interface Props {
     children?: React.ReactNode;
