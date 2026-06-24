@@ -9,6 +9,7 @@ import { RegDropdownOptions } from "../../state-mgmt/slices/regFormSlice";
 import useAppStore from "../../state-mgmt/appStore";
 import { CamperDetailsReqBody } from "../../apiClient/registerCamper/registerCamper.types";
 import appToastConfig from "../../config/toastConfig";
+import RegFormFooter from "./RegFormFooter";
 
 
 interface Props {
@@ -164,30 +165,11 @@ const RegFormContent = ({
                     />
                 </VStack>
             </VStack>
-            {
-                isRegistering ? 
-                <Center
-                    bg={"palette.room"}
-                    color={"palette.life"}
-                    px={"16px"}
-                    borderRadius={50}
-                    height={"40px"}
-                >
-                    <Text
-                        textStyle="orion"
-                        fontWeight={"medium"}
-                    >
-                        registering...
-                    </Text>
-                </Center>
-                :
-                <AppButton
-                    onClick={handleRegisterCamper}
-                    isDisabled={!isFormValid}
-                >
-                    register
-                </AppButton>
-            }
+            <RegFormFooter
+                isRegistering={isRegistering}
+                handleRegisterCamper={handleRegisterCamper}
+                canRegister={isFormValid}
+            />
         </VStack>
     )
 }

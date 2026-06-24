@@ -2,7 +2,10 @@ import { Box, Center, Image } from '@chakra-ui/react'
 import GradientLayer from './bg/GradientLayer'
 import { ParticleLayer } from './bg/ParticleLayer'
 import MobileFrame from './util/MobileFrame';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useNavigate } from 'react-router-dom';
+import useAppStore from '../state-mgmt/appStore';
+import { useEffect, useState } from 'react';
+import RegSuccessDialog from './registration-form/RegSuccessDialog';
 
 interface Props {
     children?: React.ReactNode;
@@ -11,6 +14,31 @@ interface Props {
 const AppShell = ({
     children
 }: Props) => {
+    const navigateTo = useNavigate();
+
+    const regCamperStatus = useAppStore(s => s.regCamperStatus);
+
+    const [isRegSuccessDiagOpen, setRegSuccessDiagOpen] = useState(false);
+    const [
+        registeredCamperDetails, 
+        setRegisteredCamperDetails
+    ] = useState<RegisteredCamperDetails | null>(null);
+
+    useEffect(() => {
+        if (regCamperStatus.kind === 'success') {
+            setRegSuccessDiagOpen(true);
+            setRegisteredCamperDetails(
+                regCamperStatus.registeredCamperDetails
+            )
+            navigateTo("/my-details");
+        }
+    }, [regCamperStatus.kind])
+
+    const handleDialogDismiss = () => {
+        setRegSuccessDiagOpen(false);
+        setRegisteredCamperDetails(null);
+    }
+
     return (
         <Box 
             position={"relative"}
@@ -44,6 +72,14 @@ const AppShell = ({
                     <Outlet />
                 </MobileFrame>
             </Center>
+            {
+                registeredCamperDetails &&             
+                <RegSuccessDialog 
+                    isOpen={isRegSuccessDiagOpen}
+                    onDismiss={handleDialogDismiss}
+                    regCamperDetails={registeredCamperDetails}
+                />
+            }
             <ParticleLayer />
         </Box>
     )
