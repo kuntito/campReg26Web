@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import useAppStore from "../state-mgmt/appStore";
-import CenterSpinner from "./util/CenterSpinner";
-import RegistrationForm from "./registration-form/RegistrationForm";
-import ActionRefetchForm from "./registration-form/ActionRefetchForm";
+import useAppStore from "../../state-mgmt/appStore";
+import CenterSpinner from "../util/CenterSpinner";
+import ActionRefetchForm from "../registration-form/ActionRefetchForm";
+import RegistrationForm from "../registration-form/RegistrationForm";
 
-const AppContent = () => {
+const RegistrationScreen = () => {
     const regDropdownsState = useAppStore(s => s.regDropdownsState);
     const fetchRegDropdowns = useAppStore(s => s.fetchRegDropdowns)
     useEffect(() => {
@@ -25,4 +25,4 @@ const AppContent = () => {
     )
 }
 
-export default AppContent
+export default RegistrationScreen

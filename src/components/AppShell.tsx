@@ -1,6 +1,8 @@
 import { Box, Center, Image } from '@chakra-ui/react'
 import GradientLayer from './bg/GradientLayer'
 import { ParticleLayer } from './bg/ParticleLayer'
+import MobileFrame from './util/MobileFrame';
+import { Outlet } from 'react-router-dom';
 
 interface Props {
     children?: React.ReactNode;
@@ -34,7 +36,9 @@ const AppShell = ({
                 inset={0}
                 flexDirection={"column"}
             >
-                {children}
+                <MobileFrame>
+                    <Outlet />
+                </MobileFrame>
             </Center>
             <ParticleLayer />
         </Box>

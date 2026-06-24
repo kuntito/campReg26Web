@@ -46,3 +46,6 @@ export default defineConfig({
 
 +   for particle layer
     `npm install @tsparticles/react@3.0.0 @tsparticles/engine@3.9.1 @tsparticles/slim@3.9.1`
+
++   for page navigation.
+    `npm i react-router-dom`
