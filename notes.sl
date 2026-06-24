@@ -49,3 +49,6 @@ export default defineConfig({
 
 +   for page navigation.
     `npm i react-router-dom`
+
++   for web sockets
+    `npm install socket.io-client`

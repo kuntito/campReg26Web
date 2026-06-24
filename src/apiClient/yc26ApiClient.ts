@@ -7,7 +7,7 @@ const yc26ApiClient = {
     getRegDropdowns: async (
 
     ): Promise<GetRegDropdownsResponse> => {
-        const url = `${BASE_URL}/getRegDropdowns`;
+        const url = `${BASE_URL}/api/yc26/getRegDropdowns`;
         const res = await fetch(
             url,
             {
@@ -20,7 +20,7 @@ const yc26ApiClient = {
     registerCamper: async (
         camperDetails: CamperDetailsReqBody,
     ): Promise<RegisterCamperResponse> => {
-        const url = `${BASE_URL}/register`;
+        const url = `${BASE_URL}/api/yc26/register`;
         const res = await fetch(url, {
             method: 'POST',
             headers: {

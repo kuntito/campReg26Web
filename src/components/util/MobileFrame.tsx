@@ -1,4 +1,5 @@
 import { Center } from "@chakra-ui/react";
+import RegistrantCounter from "./RegistrantCounter";
 
 interface MobileFrameProps {
     children?: React.ReactNode;
@@ -15,8 +16,14 @@ const MobileFrame = ({
         borderRadius={"16px"}
         boxShadow={"sm"}
         overflow={"hidden"}
+        position={"relative"}
     >
         {children}
+        <RegistrantCounter
+            position="absolute"
+            top={"10px"}
+            right={"16px"}
+        />
     </Center>;
 }
 
