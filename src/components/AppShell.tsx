@@ -32,6 +32,10 @@ const AppShell = ({
                 regCamperStatus.registeredCamperDetails
             )
             navigateTo("/my-details");
+
+            setTimeout(() => {
+                handleDialogDismiss();
+            }, 3000);
         }
     }, [regCamperStatus.kind])
 
