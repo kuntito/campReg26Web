@@ -33,8 +33,12 @@ const AppShell = ({
             </Center>
             <Center
                 position={"absolute"}
-                inset={0}
+                top={0}
+                left={0}
+                right={0}
                 flexDirection={"column"}
+                minH={"100vh"}
+                overflowY={"auto"}
             >
                 <MobileFrame>
                     <Outlet />
