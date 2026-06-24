@@ -1,11 +1,14 @@
-import { VStack } from "@chakra-ui/react";
-import { useState } from "react";
+import { Box, useToast, VStack, Text, Center } from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import { RegistrationData } from "../../models";
 import AppButton from "../util/AppButton";
 import DropdownField from "./input-fields/DropdownField";
 import EmailInputField from "./input-fields/EmailInputField";
 import NameInputField from "./input-fields/NameInputField";
 import { RegDropdownOptions } from "../../state-mgmt/slices/regFormSlice";
+import useAppStore from "../../state-mgmt/appStore";
+import { CamperDetailsReqBody } from "../../apiClient/registerCamper/registerCamper.types";
+import appToastConfig from "../../config/toastConfig";
 
 
 interface Props {
@@ -20,7 +23,7 @@ const RegFormContent = ({
         lastName: "",
         email: "",
         branchId: null,
-        sex: null,
+        genderId: null,
         fellowshipId: null,
         unitId: null,
     });
@@ -30,31 +33,61 @@ const RegFormContent = ({
         regData.lastName.trim() !== "" &&
         regData.email.trim() !== "" &&
         regData.branchId !== null &&
-        regData.sex !== null &&
+        regData.genderId !== null &&
         regData.fellowshipId !== null &&
         regData.unitId !== null;
 
-    const handleStringChange = (
-        formField: keyof RegistrationData
-    ) => (
-        value: string
-    ) => {
-        setRegData({
-            ...regData,
-            [formField]: value
-        });
-    }
 
     const handleRegDataChange = (
         formField: keyof RegistrationData
     ) => (
         value: RegistrationData[typeof formField]
     ) => {
-        setRegData({
-            ...regData,
+        setRegData(prev => ({
+            ...prev,
             [formField]: value
-        });
+        }));
     }
+
+    const regCamper = useAppStore(s => s.regCamper)
+    const handleRegisterCamper = () => {
+        if (!isFormValid) return;
+        if (isRegistering) return;
+        regCamper(regData as CamperDetailsReqBody);
+    };
+
+
+    const toast = useToast();
+    const regStatus = useAppStore(s => s.regCamperStatus);
+    const resetRegStatus = useAppStore(s => s.resetRegStatus);
+    const isRegistering = regStatus.kind === 'awaiting response';
+    useEffect(() => {
+        switch (regStatus.kind) {
+            case 'success':
+                // TODO, start here, navigate to you're reg screen...
+                toast({
+                    ...appToastConfig,
+                    description: 'success!',
+                    status: "success"
+                })
+                resetRegStatus();
+                break;
+            case 'error':
+                toast({
+                    ...appToastConfig,
+                    description: regStatus.reason,
+                    status: "error"
+                })
+                resetRegStatus();
+                break;
+            case 'awaiting response':
+                // show loading
+                break;
+            case 'idle':
+                // do nothing
+                break;
+        }
+    }, [regStatus])
 
     return (
         <VStack
@@ -62,73 +95,99 @@ const RegFormContent = ({
             h={"100%"}
             justifyContent={"center"}
         >
-            <VStack>
-                <NameInputField
-                    label={"first name"}
-                    value={regData.firstName}
-                    onValueChange={handleStringChange("firstName")}
-                />
-                <NameInputField
-                    label={"last name"}
-                    value={regData.lastName}
-                    onValueChange={handleStringChange("lastName")}
-                />
-            </VStack>
-            <EmailInputField 
-                value={regData.email}
-                onValueChange={handleStringChange("email")}
-            />
-            <VStack
-                gap={"12px"}
+            <VStack            
+                gap={"32px"}
+                justifyContent={"center"}
+                opacity={isRegistering ? 0.5 : 1}
+                pointerEvents={isRegistering ? "none" : "auto"}
             >
-                <DropdownField
-                    label="your gender"
-                    floatingLabel="gender"
-                    options={dropdownOptions.sex.map((
-                        s: string,
-                        index: number
-                    ) => ({
-                        id: index,
-                        label: s,
-                    }))}
-                    onSelect={(id) => handleRegDataChange("sex")(dropdownOptions.sex[id])}
+                <VStack>
+                    <NameInputField
+                        label={"first name"}
+                        value={regData.firstName}
+                        onValueChange={handleRegDataChange("firstName")}
+                    />
+                    <NameInputField
+                        label={"last name"}
+                        value={regData.lastName}
+                        onValueChange={handleRegDataChange("lastName")}
+                    />
+                </VStack>
+                <EmailInputField 
+                    value={regData.email}
+                    onValueChange={handleRegDataChange("email")}
                 />
-                <DropdownField 
-                    label="your fellowship"
-                    floatingLabel="fellowship"
-                    options={dropdownOptions.fellowships.map((f) => ({
-                        id: f.fellowshipId,
-                        label: f.fellowshipName,
-                    }))}
-                    onSelect={(id) => handleRegDataChange("fellowshipId")(id)}
-                />
-                <DropdownField 
-                    label="your branch"
-                    floatingLabel="branch"
-                    options={dropdownOptions.branches.map((b) => ({
-                        id: b.branchId,
-                        label: b.branchName,
-                    }))}
-                    onSelect={(id) => handleRegDataChange("branchId")(id)}
-                />
-                <DropdownField 
-                    label="your unit"
-                    floatingLabel="unit"
-                    options={dropdownOptions.units.map((u) => ({
-                        id: u.unitId,
-                        label: u.unitName,
-                    }))}
-                    onSelect={(id) => handleRegDataChange("unitId")(id)}
-                />
+                <VStack
+                    gap={"12px"}
+                >
+                    <DropdownField
+                        label="your gender"
+                        floatingLabel="gender"
+                        options={
+                            dropdownOptions.genders.map((g) => ({
+                                id: g.genderId,
+                                label: g.genderName,
+                            }))
+                        }
+                        selectedId={regData.genderId}
+                        onSelect={(id) => handleRegDataChange("genderId")(id)}
+                    />
+                    <DropdownField 
+                        label="your fellowship"
+                        floatingLabel="fellowship"
+                        options={dropdownOptions.fellowships.map((f) => ({
+                            id: f.fellowshipId,
+                            label: f.fellowshipName,
+                        }))}
+                        selectedId={regData.fellowshipId}
+                        onSelect={(id) => handleRegDataChange("fellowshipId")(id)}
+                    />
+                    <DropdownField 
+                        label="your branch"
+                        floatingLabel="branch"
+                        options={dropdownOptions.branches.map((b) => ({
+                            id: b.branchId,
+                            label: b.branchName,
+                        }))}
+                        selectedId={regData.branchId}
+                        onSelect={(id) => handleRegDataChange("branchId")(id)}
+                    />
+                    <DropdownField 
+                        label="your unit"
+                        floatingLabel="unit"
+                        options={dropdownOptions.units.map((u) => ({
+                            id: u.unitId,
+                            label: u.unitName,
+                        }))}
+                        selectedId={regData.unitId}
+                        onSelect={(id) => handleRegDataChange("unitId")(id)}
+                    />
+                </VStack>
             </VStack>
-            <AppButton
-                onClick={
-                    () => {console.log(regData);}
-                }
-                isDisabled={!isFormValid}
-            >
-                register
-            </AppButton>
+            {
+                isRegistering ? 
+                <Center
+                    bg={"palette.room"}
+                    color={"palette.life"}
+                    px={"16px"}
+                    borderRadius={50}
+                    height={"40px"}
+                >
+                    <Text
+                        textStyle="orion"
+                        fontWeight={"medium"}
+                    >
+                        registering...
+                    </Text>
+                </Center>
+                :
+                <AppButton
+                    onClick={handleRegisterCamper}
+                    isDisabled={!isFormValid}
+                >
+                    register
+                </AppButton>
+            }
         </VStack>
     )
 }

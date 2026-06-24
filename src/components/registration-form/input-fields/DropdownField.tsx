@@ -10,6 +10,7 @@ interface Props {
     label: string;
     floatingLabel: string;
     options: DropdownOption[];
+    selectedId: number | null;
     onSelect: (id: number) => void;
 }
 
@@ -17,12 +18,12 @@ const DropdownField = ({
     label,
     floatingLabel,
     options,
+    selectedId,
     onSelect
 }: Props) => {
     const [isFocused, setIsFocused] = useState(false);
-    const [isItemSelected, setItemSelected] = useState(false);
 
-    const showFloatingLabel = isItemSelected && !isFocused
+    const showFloatingLabel = selectedId != null && !isFocused
 
     return (
         <Box
@@ -30,9 +31,9 @@ const DropdownField = ({
         >
             <Select
                 placeholder={label}
+                value={selectedId ?? ""}
                 onChange={(e) => {
                     onSelect(Number(e.target.value))
-                    setItemSelected(!!e.target.value)
                     e.target.blur();
                 }}
                 bg={"palette.lifeAlpha"}
@@ -42,7 +43,10 @@ const DropdownField = ({
                 _focus={{ 
                     bg: "palette.life",
                     boxShadow: "none",
-                    borderColor: "palette.roomAlpha"
+                    // TODO 
+                    // borderColor and borderWidth should be hoisted for dropdowns and input
+                    borderColor: "palette.room",
+                    borderWidth: "2px"
                 }}
                 onFocus={() => setIsFocused(true)}
                 onBlur={() => setIsFocused(false)}

@@ -1,14 +1,13 @@
 import { StateCreator } from "zustand";
 import { yc26DataSource } from "../../apiClient/yc26DataSource";
-import { BranchApi, FellowshipApi, UnitApi } from "../../apiClient/getRegDropdowns/getRegDropdowns.types";
+import { BranchApi, FellowshipApi, GenderApi, UnitApi } from "../../apiClient/getRegDropdowns/getRegDropdowns.types";
 
-export type SexOption = "male" | "female";
 
 export interface RegDropdownOptions {
     branches: BranchApi[];
     fellowships: FellowshipApi[];
     units: UnitApi[];
-    sex: SexOption[];
+    genders: GenderApi[];
 }
 
 
@@ -51,7 +50,7 @@ export const createRegFormSlice: StateCreator<RegFormSlice> = (
                     branches: res.branches,
                     fellowships: res.fellowships,
                     units: res.units,
-                    sex: ["male", "female"],
+                    genders: res.genders,
                 }
             }
         });

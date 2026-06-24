@@ -13,8 +13,14 @@ export interface UnitApi {
     unitName: string;
 }
 
+export interface GenderApi {
+    genderId: number;
+    genderName: string;
+}
+
 interface GetRegDropdownsSuccess {
     success: true;
+    genders: GenderApi[];
     branches: BranchApi[];
     fellowships: FellowshipApi[];
     units: UnitApi[];
