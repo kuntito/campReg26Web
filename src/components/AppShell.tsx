@@ -35,7 +35,7 @@ const AppShell = ({
 
             setTimeout(() => {
                 handleDialogDismiss();
-            }, 3000);
+            }, 5000);
         }
     }, [regCamperStatus.kind])
 
