@@ -113,11 +113,11 @@ const RegFormContent = ({
                         value={regData.lastName}
                         onValueChange={handleRegDataChange("lastName")}
                     />
+                    <EmailInputField 
+                        value={regData.email}
+                        onValueChange={handleRegDataChange("email")}
+                    />
                 </VStack>
-                <EmailInputField 
-                    value={regData.email}
-                    onValueChange={handleRegDataChange("email")}
-                />
                 <VStack
                     gap={"12px"}
                 >
