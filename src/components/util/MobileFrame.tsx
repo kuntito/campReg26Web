@@ -19,11 +19,11 @@ const MobileFrame = ({
         position={"relative"}
     >
         {children}
-        <RegistrantCounter
+        {/* <RegistrantCounter
             position="absolute"
             top={"10px"}
             right={"16px"}
-        />
+        /> */}
     </Center>;
 }
 
