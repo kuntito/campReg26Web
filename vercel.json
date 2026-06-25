@@ -1,0 +1,8 @@
+{
+    "redirects": [
+        {
+            "source": "/register-yc26",
+            "destination": "/"
+        }
+    ]
+}
