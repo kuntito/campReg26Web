@@ -17,7 +17,7 @@ const NameInputField = ({
         onValueChange,
         {
             regex: /[^A-Za-z-]/g,
-            errorMessage: "only alphabets and hyphen allowed",
+            errorMessage: "only letters, a-z and hyphens are allowed.",
         }
     )
 
