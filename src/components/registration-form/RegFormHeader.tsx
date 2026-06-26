@@ -11,7 +11,7 @@ const RegFormHeader = () => {
                 color={"palette.life"}
                 textStyle={"blaze"}
             >
-                Youth Camp '26
+                National Youth Camp '26
             </Text>
         </Center>
     )
