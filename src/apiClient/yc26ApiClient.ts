@@ -1,5 +1,7 @@
 import { envConfig } from "../config/envConfig";
+import { CamperProfileResponse } from "./getCamperProfile/getCamperProfile.types";
 import { GetRegDropdownsResponse } from "./getRegDropdowns/getRegDropdowns.types";
+import { GetRegStatusResponse } from "./getRegStatus/getRegStatus.types";
 import { CamperDetailsReqBody, RegisterCamperResponse } from "./registerCamper/registerCamper.types";
 
 const BASE_URL = envConfig.VITE_YC26_API_BASE_URL;
@@ -31,6 +33,32 @@ const yc26ApiClient = {
         });
 
         return await res.json();
+    },
+    getCamperProfile: async (
+        camperMail: string,
+    ): Promise<CamperProfileResponse> => {
+        const url = `${BASE_URL}/api/yc26/camper-profile/${encodeURIComponent(camperMail)}`;
+        const res = await fetch(
+            url,
+            {
+                headers: { 'ngrok-skip-browser-warning': 'true' }
+            }
+        );
+
+        return res.json();
+    },
+    getRegStatus: async (
+
+    ): Promise<GetRegStatusResponse> => {
+        const url = `${BASE_URL}/api/yc26/reg-status`;
+        const res = await fetch(
+            url,
+            {
+                headers: { 'ngrok-skip-browser-warning': 'true' }
+            }
+        );
+
+        return res.json();
     },
 }
 

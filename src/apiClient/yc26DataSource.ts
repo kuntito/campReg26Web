@@ -11,4 +11,12 @@ export const yc26DataSource = {
         () => yc26ApiClient.registerCamper(camperDetails),
         "registers a new camper"
     ),
+    getRegStatus: () => safeApiCall(
+        () => yc26ApiClient.getRegStatus(),
+        "gets the number of registrants per branch"
+    ),
+    getCamperProfile: (camperEmail: string) => safeApiCall(
+        () => yc26ApiClient.getCamperProfile(camperEmail),
+        "gets a campers profile by email lookup"
+    )
 };
