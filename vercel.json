@@ -4,5 +4,8 @@
             "source": "/register-yc26",
             "destination": "/"
         }
+    ],
+    "rewrites": [
+        { "source": "/(.*)", "destination": "/" }
     ]
 }
