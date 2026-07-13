@@ -18,6 +18,7 @@ const AppShell = ({
     const navigateTo = useNavigate();
 
     const regCamperStatus = useAppStore(s => s.regCamperStatus);
+    const fetchCamperProfile = useAppStore(s => s.fetchCamperProfile);
 
     const [isRegSuccessDiagOpen, setRegSuccessDiagOpen] = useState(false);
     const [
@@ -31,6 +32,7 @@ const AppShell = ({
             setRegisteredCamperDetails(
                 regCamperStatus.registeredCamperDetails
             )
+            fetchCamperProfile(regCamperStatus.registeredCamperDetails.email);
             navigateTo("/my-details");
 
             setTimeout(() => {
