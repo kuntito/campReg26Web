@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import AppShell from "./components/AppShell";
 import RegistrationScreen from "./components/screens/RegistrationScreen";
 import MyDetailsScreen from "./components/screens/MyDetailsScreen";
+import RegStatusScreen from "./components/screens/RegStatusScreen";
 
 const appScreenRouter = createBrowserRouter([
     {
@@ -9,7 +10,8 @@ const appScreenRouter = createBrowserRouter([
         element: <AppShell />,
         children: [
             { index: true, element: <RegistrationScreen /> },
-            { path: "/my-details", element: <MyDetailsScreen /> }
+            { path: "/my-details", element: <MyDetailsScreen /> },
+            { path: "/reg-status", element: <RegStatusScreen /> }
         ]
     },
 ])
