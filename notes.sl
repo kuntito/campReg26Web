@@ -52,3 +52,6 @@ export default defineConfig({
 
 +   for web sockets
     `npm install socket.io-client`
+
++   for rendering markdown
+    `npm install react-markdown`

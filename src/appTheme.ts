@@ -10,6 +10,8 @@ const colors = {
         life: '#FFFFFF',
         lifeAlpha: '#FFFFFFE6', // CC is 80% opacity
         raze: '#68B439',
+        skylar: '#8B8988',
+        unit: '#3A3339'
     }
 }
 
