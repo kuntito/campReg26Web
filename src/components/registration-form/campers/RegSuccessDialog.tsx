@@ -5,15 +5,17 @@ import RegistrationSuccess from "./RegistrationSuccess"
 interface Props {
     isOpen: boolean;
     onDismiss: () => void;
-    regCamperDetails: RegisteredCamperDetails;
+    firstName: string;
+    lastName: string;
 }
 
 const RegSuccessDialog = ({
     isOpen,
     onDismiss,
-    regCamperDetails,
+    firstName,
+    lastName,
 }: Props) => {
-    const registrantName = `${regCamperDetails.firstName} ${regCamperDetails.lastName}`;
+    const registrantName = `${firstName} ${lastName}`;
 
     return (
         <AppDialog

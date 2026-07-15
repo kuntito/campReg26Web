@@ -3,9 +3,16 @@ import AppIconButton from "../../util/AppIconButton"
 import { RefreshIcon } from "../../icons/RefreshIcon"
 import useAppStore from "../../../state-mgmt/appStore"
 
-const ActionRefetchForm = () => {
-    const fetchRegDropdowns = useAppStore(s => s.fetchRegDropdowns);
+interface Props {
+    retryAction: () => void;
+}
 
+const ActionRefetchForm = ({
+    retryAction
+}: Props) => {
+    
+    const color = "palette.room";
+    const colorOnHover = "palette.roomAlpha";
     return (
         <Center
             w={"100%"}
@@ -14,15 +21,15 @@ const ActionRefetchForm = () => {
             <VStack>
                 <Text
                     textStyle={"orion"}
-                    color={"palette.life"}
+                    color={color}
                 >
                     something went wrong, retry.
                 </Text>
                 <AppIconButton
                     icon={<RefreshIcon boxSize={"24px"} />}
-                    iconColor="palette.life"
-                    iconColorWhenHovered="palette.branch"
-                    onClick={fetchRegDropdowns}
+                    iconColor={color}
+                    iconColorWhenHovered={colorOnHover}
+                    onClick={retryAction}
                 />
             </VStack>
         </Center>

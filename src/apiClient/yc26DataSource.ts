@@ -1,5 +1,6 @@
 import { safeApiCall } from "./helpers";
 import { CamperDetailsReqBody } from "./registerCamper/registerCamper.types";
+import { CoordDetailsReqBody } from "./registerCoordinator/registerCoordinator.types";
 import yc26ApiClient from "./yc26ApiClient";
 
 export const yc26DataSource = {
@@ -7,9 +8,17 @@ export const yc26DataSource = {
         () => yc26ApiClient.getRegDropdowns(),
         "gets the options for all dropdown fields on the reg form"
     ),
+    getCoordRegDropdowns: () => safeApiCall(
+        () => yc26ApiClient.getCoordRegDropdowns(),
+        "gets the dropdown options for the coordinators registration form"
+    ),
     registerCamper: (camperDetails: CamperDetailsReqBody) => safeApiCall(
         () => yc26ApiClient.registerCamper(camperDetails),
         "registers a new camper"
+    ),
+    registerCoordinator: (coordinatorDetails: CoordDetailsReqBody) => safeApiCall(
+        () => yc26ApiClient.registerCoordinator(coordinatorDetails),
+        "registers a new camp coordinator"
     ),
     getRegStatus: () => safeApiCall(
         () => yc26ApiClient.getRegStatus(),

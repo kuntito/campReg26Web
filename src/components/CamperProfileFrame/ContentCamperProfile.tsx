@@ -6,11 +6,12 @@ import useAppStore from "../../state-mgmt/appStore";
 import CenterSpinner from "../util/CenterSpinner";
 import appToastConfig from "../../config/toastConfig";
 import CamperProfileCard from "./CamperProfileCard";
+import { validateEmail } from "../../util/validateEmail";
 
 const ContentCamperProfile = () => {
     const [regEmail, setRegEmail] = useState<string>("");
 
-    const isEmailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(regEmail.trim());
+    const isEmailValid = validateEmail(regEmail);
 
     const stateFetchCamperProfile = useAppStore(s => s.stateFetchCamperProfile);
     const resetStateCamperProfile = useAppStore(s => s.resetStateCamperProfile);

@@ -7,7 +7,7 @@ const CenterSpinner = () => {
             h={"100%"}
         >
             <Spinner 
-                color="palette.lifeAlpha"
+                color="palette.room"
             />
         </Center>
     )

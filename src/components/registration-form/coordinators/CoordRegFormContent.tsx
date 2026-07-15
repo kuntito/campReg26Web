@@ -1,34 +1,33 @@
-import { Box, useToast, VStack, Text, Center } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { RegistrationData } from "../../../models";
-import AppButton from "../../util/AppButton";
-import DropdownField from "../input-fields/DropdownField";
-import EmailInputField from "../input-fields/EmailInputField";
-import NameInputField from "../input-fields/NameInputField";
-import { CampersRegDropdownOptions } from "../../../state-mgmt/slices/regFormSlice";
-import useAppStore from "../../../state-mgmt/appStore";
-import { CamperDetailsReqBody } from "../../../apiClient/registerCamper/registerCamper.types";
-import appToastConfig from "../../../config/toastConfig";
-import RegFormFooter from "./RegFormFooter";
+import { CoordRegDropdownOptions } from "../../../state-mgmt/slices/coordinatorRegFormSlice"
+import { CoordRegData } from "../../../models";
 import { validateEmail } from "../../../util/validateEmail";
-
+import useAppStore from "../../../state-mgmt/appStore";
+import { CoordDetailsReqBody } from "../../../apiClient/registerCoordinator/registerCoordinator.types";
+import { useToast, VStack } from "@chakra-ui/react";
+import appToastConfig from "../../../config/toastConfig";
+import NameInputField from "../input-fields/NameInputField";
+import EmailInputField from "../input-fields/EmailInputField";
+import DropdownField from "../input-fields/DropdownField";
+import CoordRegFormFooter from "./CoordRegFormFooter";
 
 interface Props {
-    dropdownOptions: CampersRegDropdownOptions;
+    dropdownOptions: CoordRegDropdownOptions;
 }
 
-const RegFormContent = ({
-    dropdownOptions,
-}: Props) => {    
-    const [regData, setRegData] = useState<RegistrationData>({
-        firstName: "",
-        lastName: "",
-        email: "",
-        branchId: null,
-        genderId: null,
-        fellowshipId: null,
-        unitId: null,
-    });
+const emptyCoordRegData = {
+    firstName: "",
+    lastName: "",
+    email: "",
+    branchId: null,
+    genderId: null,
+    lodgeOptionId: null,
+};
+
+const CoordRegFormContent = ({
+    dropdownOptions
+}: Props) => {
+    const [regData, setRegData] = useState<CoordRegData>(emptyCoordRegData);
 
     const isFormValid = 
         regData.firstName.trim() !== "" &&
@@ -36,14 +35,12 @@ const RegFormContent = ({
         validateEmail(regData.email) &&
         regData.branchId !== null &&
         regData.genderId !== null &&
-        regData.fellowshipId !== null &&
-        regData.unitId !== null;
-
+        regData.lodgeOptionId !== null;
 
     const handleRegDataChange = (
-        formField: keyof RegistrationData
+        formField: keyof CoordRegData
     ) => (
-        value: RegistrationData[typeof formField]
+        value: CoordRegData[typeof formField]
     ) => {
         setRegData(prev => ({
             ...prev,
@@ -51,35 +48,37 @@ const RegFormContent = ({
         }));
     }
 
-    const regCamper = useAppStore(s => s.regCamper)
-    const handleRegisterCamper = () => {
+    const toast = useToast();
+    const regState = useAppStore(s => s.regCoordState);
+    const resetState = useAppStore(s => s.resetRegCoordState);
+    const isRegistering = regState.kind === 'awaiting response';
+
+
+    const regCoordinator = useAppStore(s => s.regCoordinator);
+    const handleRegisterCoordinator = () => {
         if (!isFormValid) return;
         if (isRegistering) return;
-        regCamper(regData as CamperDetailsReqBody);
-    };
+        regCoordinator(regData as CoordDetailsReqBody);
+    }
 
-
-    const toast = useToast();
-    const regStatus = useAppStore(s => s.regCamperStatus);
-    const resetRegStatus = useAppStore(s => s.resetRegStatus);
-    const isRegistering = regStatus.kind === 'awaiting response';
     useEffect(() => {
-        switch (regStatus.kind) {
+        switch (regState.kind) {
             case 'success':
                 toast({
                     ...appToastConfig,
                     description: 'success!',
                     status: "success"
                 })
-                resetRegStatus();
+                resetState();
+                setRegData(emptyCoordRegData);
                 break;
             case 'error':
                 toast({
                     ...appToastConfig,
-                    description: regStatus.reason,
+                    description: regState.reason,
                     status: "error"
                 })
-                resetRegStatus();
+                resetState();
                 break;
             case 'awaiting response':
                 // show loading
@@ -88,7 +87,7 @@ const RegFormContent = ({
                 // do nothing
                 break;
         }
-    }, [regStatus])
+    }, [regState]);
 
     return (
         <VStack
@@ -134,16 +133,6 @@ const RegFormContent = ({
                         onSelect={(id) => handleRegDataChange("genderId")(id)}
                     />
                     <DropdownField 
-                        label="your fellowship"
-                        floatingLabel="fellowship"
-                        options={dropdownOptions.fellowships.map((f) => ({
-                            id: f.fellowshipId,
-                            label: f.fellowshipName,
-                        }))}
-                        selectedId={regData.fellowshipId}
-                        onSelect={(id) => handleRegDataChange("fellowshipId")(id)}
-                    />
-                    <DropdownField 
                         label="your branch"
                         floatingLabel="branch"
                         options={dropdownOptions.branches.map((b) => ({
@@ -154,24 +143,24 @@ const RegFormContent = ({
                         onSelect={(id) => handleRegDataChange("branchId")(id)}
                     />
                     <DropdownField 
-                        label="your unit"
-                        floatingLabel="unit"
-                        options={dropdownOptions.units.map((u) => ({
-                            id: u.unitId,
-                            label: u.unitName,
+                        label="are you sleeping in camp hostel?"
+                        floatingLabel="lodging arrangements"
+                        options={dropdownOptions.lodgeOptions.map((lopt) => ({
+                            id: lopt.lodgeOptionId,
+                            label: lopt.lodgeOptionText,
                         }))}
-                        selectedId={regData.unitId}
-                        onSelect={(id) => handleRegDataChange("unitId")(id)}
+                        selectedId={regData.lodgeOptionId}
+                        onSelect={(id) => handleRegDataChange("lodgeOptionId")(id)}
                     />
                 </VStack>
             </VStack>
-            <RegFormFooter
+            <CoordRegFormFooter
                 isRegistering={isRegistering}
-                handleRegisterCamper={handleRegisterCamper}
+                handleRegisterCoord={handleRegisterCoordinator}
                 canRegister={isFormValid}
             />
         </VStack>
     )
 }
 
-export default RegFormContent
+export default CoordRegFormContent

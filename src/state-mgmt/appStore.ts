@@ -3,9 +3,17 @@ import { createCamperRegFormSlice, CampersRegFormSlice } from "./slices/regFormS
 import { createRegCamperSlice, RegCamperSlice } from "./slices/reqCamperSlice";
 import { CamperProfileSlice, createCamperProfileSlice } from "./slices/camperProfileSlice";
 import { createCamperRegStatusSlice, CamperRegStatusSlice } from "./slices/regStatusSlice";
+import { createRegCoordSlice, RegCoordSlice } from "./slices/regCoordSlice";
+import { CoordRegFormSlice, createCoordRegFormSlice } from "./slices/coordinatorRegFormSlice";
 
 
-type AppStore = CampersRegFormSlice & RegCamperSlice & CamperProfileSlice & CamperRegStatusSlice;
+type AppStore = 
+    CampersRegFormSlice 
+    & RegCamperSlice
+    & CamperProfileSlice
+    & CamperRegStatusSlice
+    & RegCoordSlice
+    & CoordRegFormSlice;
 
 const useAppStore = create<AppStore>()(
     (...args) => {
@@ -13,12 +21,16 @@ const useAppStore = create<AppStore>()(
         const regCamperSlice = createRegCamperSlice(...args);
         const camperProfileSlice = createCamperProfileSlice(...args);
         const regStatusSlice = createCamperRegStatusSlice(...args);
+        const regCoordSlice = createRegCoordSlice(...args);
+        const coordRegFormSlice = createCoordRegFormSlice(...args);
         
         return {
             ...regFormSlice,
             ...regCamperSlice,
             ...camperProfileSlice,
             ...regStatusSlice,
+            ...regCoordSlice,
+            ...coordRegFormSlice,
         }
     }
 )

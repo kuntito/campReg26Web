@@ -1,6 +1,8 @@
 import { Text, VStack } from "@chakra-ui/react";
 import { useState } from "react";
 import AppInputField from "./AppInputField";
+import { useLocation } from "react-router-dom";
+import { checkIsCoordinatorPage } from "../../../util/checkCoordinatorPage";
 
 
 interface Props {
@@ -26,6 +28,13 @@ const LabelAndInput = ({
 
     const [isInputFocused, setInputFocused ] = useState(false);
 
+    const location = useLocation();
+    const isCoordinatorPage = checkIsCoordinatorPage(location);
+
+    // TODO the coordinator page, has a different color gradient
+    // hence, the color change, to contrast the with the bg.
+    // see `GradientLayer.tsx` for details
+    const labelColor = isCoordinatorPage ? "palette.life" : "palette.room";
     
     return (
         <VStack
@@ -35,6 +44,7 @@ const LabelAndInput = ({
             <Text
                 textStyle={"orion"}
                 fontWeight={isInputFocused ? "medium" : "normal"}
+                color={labelColor}
             >
                 {label}
             </Text>

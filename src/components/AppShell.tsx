@@ -12,38 +12,72 @@ interface Props {
     children?: React.ReactNode;
 }
 
+// FIXME, i extracted this solely for displaying the success dialog after registration
+// works for campers and coordinators
+// i could call it `RegisteredCamperDetails`, but an object already exists for that
+// referring to the details of a registered campers. and by campers, i mean not-coordinators.
+// hence, the object has `unit` and `fellowship` information, which doesn't pertain to coordinators.
+// a refactor would have to consider these differences.
+type CamperName = {
+    firstName: string;
+    lastName: string;
+}
+
+// TODO start here, write the dialog for successful coordinator registration.
 const AppShell = ({
     children
 }: Props) => {
     const navigateTo = useNavigate();
 
     const regCamperStatus = useAppStore(s => s.regCamperStatus);
+    const regCoordState = useAppStore(s => s.regCoordState);
+    const resetRegCoordState = useAppStore(s => s.resetRegCoordState);
+
     const fetchCamperProfile = useAppStore(s => s.fetchCamperProfile);
 
     const [isRegSuccessDiagOpen, setRegSuccessDiagOpen] = useState(false);
     const [
-        registeredCamperDetails, 
-        setRegisteredCamperDetails
-    ] = useState<RegisteredCamperDetails | null>(null);
+        registeredCamperName, 
+        setRegisteredCamperName
+    ] = useState<CamperName | null>(null);
+
+    const dialog_dismiss_timeout_ms = 5000;
 
     useEffect(() => {
         if (regCamperStatus.kind === 'success') {
             setRegSuccessDiagOpen(true);
-            setRegisteredCamperDetails(
-                regCamperStatus.registeredCamperDetails
-            )
+
+            const { firstName, lastName } = regCamperStatus.registeredCamperDetails;
+            setRegisteredCamperName({
+                firstName,
+                lastName
+            });
             fetchCamperProfile(regCamperStatus.registeredCamperDetails.email);
             navigateTo("/my-details");
 
             setTimeout(() => {
                 handleDialogDismiss();
-            }, 5000);
+            }, dialog_dismiss_timeout_ms);
+        } else if (regCoordState.kind === 'success') {
+            setRegSuccessDiagOpen(true);
+
+            const { firstName, lastName } = regCoordState.registeredCoordDetails;
+            setRegisteredCamperName({
+                firstName,
+                lastName
+            });
+
+            resetRegCoordState();
+            setTimeout(() => {
+                handleDialogDismiss();
+            }, dialog_dismiss_timeout_ms);
+
         }
-    }, [regCamperStatus.kind])
+    }, [regCamperStatus.kind, regCoordState.kind]);
 
     const handleDialogDismiss = () => {
         setRegSuccessDiagOpen(false);
-        setRegisteredCamperDetails(null);
+        setRegisteredCamperName(null);
     }
 
     return (
@@ -80,11 +114,12 @@ const AppShell = ({
                 </MobileFrame>
             </Center>
             {
-                registeredCamperDetails &&             
+                registeredCamperName &&             
                 <RegSuccessDialog 
                     isOpen={isRegSuccessDiagOpen}
                     onDismiss={handleDialogDismiss}
-                    regCamperDetails={registeredCamperDetails}
+                    firstName={registeredCamperName.firstName}
+                    lastName={registeredCamperName.lastName}
                 />
             }
             <ParticleLayer />

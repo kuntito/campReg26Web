@@ -9,11 +9,17 @@ const RegistrationScreen = () => {
     const fetchRegDropdowns = useAppStore(s => s.fetchRegDropdowns)
     useEffect(() => {
         fetchRegDropdowns();
-    }, [])
+    }, []);
     
     if (regDropdownsState.kind === 'idle') return null;
     if (regDropdownsState.kind === 'fetching') return <CenterSpinner />;
-    if (regDropdownsState.kind === 'error') return <ActionRefetchForm />
+    if (regDropdownsState.kind === 'error') return (
+        <ActionRefetchForm
+            retryAction={() => {
+                fetchRegDropdowns();
+            }} 
+        />
+    )
 
 
     return (
