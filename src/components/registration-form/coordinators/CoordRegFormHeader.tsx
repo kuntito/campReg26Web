@@ -9,7 +9,7 @@ const CoordRegFormHeader = () => {
         >
             <Text
                 color={"palette.life"}
-                textStyle={"orion"}
+                textStyle={"blaze"}
             >
                 Coordinators, Youth Camp '26
             </Text>
