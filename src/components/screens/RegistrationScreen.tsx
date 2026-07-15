@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import useAppStore from "../../state-mgmt/appStore";
 import CenterSpinner from "../util/CenterSpinner";
 import ActionRefetchForm from "../registration-form/campers/ActionRefetchForm";
-import RegistrationForm from "../registration-form/campers/RegistrationForm";
+import CampersRegForm from "../registration-form/campers/RegistrationForm";
 
 const RegistrationScreen = () => {
     const regDropdownsState = useAppStore(s => s.regDropdownsState);
@@ -17,7 +17,7 @@ const RegistrationScreen = () => {
 
 
     return (
-        <RegistrationForm 
+        <CampersRegForm 
             dropdownOptions={
                 regDropdownsState.dropdownOptions
             }

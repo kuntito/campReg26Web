@@ -8,7 +8,7 @@ interface Props {
     dropdownOptions: RegDropdownOptions;
 }
 
-const RegistrationForm = ({
+const CampersRegForm = ({
     dropdownOptions,
 }: Props) => {
 
@@ -27,4 +27,4 @@ const RegistrationForm = ({
     )
 }
 
-export default RegistrationForm
+export default CampersRegForm
