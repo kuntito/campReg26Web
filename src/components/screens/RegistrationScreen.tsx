@@ -5,7 +5,7 @@ import ActionRefetchForm from "../registration-form/campers/ActionRefetchForm";
 import CampersRegForm from "../registration-form/campers/RegistrationForm";
 
 const RegistrationScreen = () => {
-    const regDropdownsState = useAppStore(s => s.regDropdownsState);
+    const regDropdownsState = useAppStore(s => s.campersRegDropdownsState);
     const fetchRegDropdowns = useAppStore(s => s.fetchRegDropdowns)
     useEffect(() => {
         fetchRegDropdowns();

@@ -1,11 +1,11 @@
 import { VStack } from "@chakra-ui/react";
 import RegFormContent from "./RegFormContent";
 import RegFormHeader from "./RegFormHeader";
-import { RegDropdownOptions } from "../../../state-mgmt/slices/regFormSlice";
+import { CampersRegDropdownOptions } from "../../../state-mgmt/slices/regFormSlice";
 
 
 interface Props {
-    dropdownOptions: RegDropdownOptions;
+    dropdownOptions: CampersRegDropdownOptions;
 }
 
 const CampersRegForm = ({

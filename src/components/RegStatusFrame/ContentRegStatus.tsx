@@ -8,9 +8,9 @@ import CenterSpinner from "../util/CenterSpinner";
 
 
 const ContentRegStatus = () => {
-    const stateRegStatus = useAppStore(s => s.stateRegStatus);
-    const resetFoo = useAppStore(s => s.resetStateRegStatus);
-    const fetchRegStatus = useAppStore(s => s.fetchRegStatus);
+    const stateRegStatus = useAppStore(s => s.stateCamperRegStatus);
+    const resetFoo = useAppStore(s => s.resetStateCamperRegStatus);
+    const fetchRegStatus = useAppStore(s => s.fetchCamperRegStatus);
 
     const isFetching = stateRegStatus.kind === 'fetching';
     const toast = useToast();
