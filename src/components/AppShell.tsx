@@ -5,7 +5,7 @@ import MobileFrame from './util/MobileFrame';
 import { Outlet, useNavigate } from 'react-router-dom';
 import useAppStore from '../state-mgmt/appStore';
 import { useEffect, useState } from 'react';
-import RegSuccessDialog from './registration-form/RegSuccessDialog';
+import RegSuccessDialog from './registration-form/campers/RegSuccessDialog';
 import { RegisteredCamperDetails } from '../apiClient/registerCamper/registerCamper.types';
 
 interface Props {

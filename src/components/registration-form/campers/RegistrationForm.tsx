@@ -1,7 +1,7 @@
 import { VStack } from "@chakra-ui/react";
 import RegFormContent from "./RegFormContent";
 import RegFormHeader from "./RegFormHeader";
-import { RegDropdownOptions } from "../../state-mgmt/slices/regFormSlice";
+import { RegDropdownOptions } from "../../../state-mgmt/slices/regFormSlice";
 
 
 interface Props {

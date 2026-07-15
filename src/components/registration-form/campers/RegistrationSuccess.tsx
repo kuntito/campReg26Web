@@ -1,5 +1,5 @@
 import { VStack, Center, Text } from "@chakra-ui/react"
-import { CheckIcon } from "../icons/CheckIcon";
+import { CheckIcon } from "../../icons/CheckIcon";
 
 interface Props {
     registrantName: string;

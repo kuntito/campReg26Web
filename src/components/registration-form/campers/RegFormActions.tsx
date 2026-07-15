@@ -1,5 +1,5 @@
 import { VStack, Text } from "@chakra-ui/react"
-import AppButton from "../util/AppButton"
+import AppButton from "../../util/AppButton"
 import { Link } from "react-router-dom";;
 
 interface Props {

@@ -1,14 +1,14 @@
 import { Box, useToast, VStack, Text, Center } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { RegistrationData } from "../../models";
-import AppButton from "../util/AppButton";
-import DropdownField from "./input-fields/DropdownField";
-import EmailInputField from "./input-fields/EmailInputField";
-import NameInputField from "./input-fields/NameInputField";
-import { RegDropdownOptions } from "../../state-mgmt/slices/regFormSlice";
-import useAppStore from "../../state-mgmt/appStore";
-import { CamperDetailsReqBody } from "../../apiClient/registerCamper/registerCamper.types";
-import appToastConfig from "../../config/toastConfig";
+import { RegistrationData } from "../../../models";
+import AppButton from "../../util/AppButton";
+import DropdownField from "../input-fields/DropdownField";
+import EmailInputField from "../input-fields/EmailInputField";
+import NameInputField from "../input-fields/NameInputField";
+import { RegDropdownOptions } from "../../../state-mgmt/slices/regFormSlice";
+import useAppStore from "../../../state-mgmt/appStore";
+import { CamperDetailsReqBody } from "../../../apiClient/registerCamper/registerCamper.types";
+import appToastConfig from "../../../config/toastConfig";
 import RegFormFooter from "./RegFormFooter";
 
 

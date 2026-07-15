@@ -1,5 +1,5 @@
-import { RegisteredCamperDetails } from "../../apiClient/registerCamper/registerCamper.types";
-import AppDialog from "../util/AppDialog"
+import { RegisteredCamperDetails } from "../../../apiClient/registerCamper/registerCamper.types";
+import AppDialog from "../../util/AppDialog"
 import RegistrationSuccess from "./RegistrationSuccess"
 
 interface Props {

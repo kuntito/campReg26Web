@@ -1,7 +1,7 @@
 import { Center, VStack, Text } from "@chakra-ui/react"
-import AppIconButton from "../util/AppIconButton"
-import { RefreshIcon } from "../icons/RefreshIcon"
-import useAppStore from "../../state-mgmt/appStore"
+import AppIconButton from "../../util/AppIconButton"
+import { RefreshIcon } from "../../icons/RefreshIcon"
+import useAppStore from "../../../state-mgmt/appStore"
 
 const ActionRefetchForm = () => {
     const fetchRegDropdowns = useAppStore(s => s.fetchRegDropdowns);
