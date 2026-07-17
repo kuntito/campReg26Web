@@ -144,8 +144,8 @@ const RegFormContent = ({
                         onSelect={(id) => handleRegDataChange("fellowshipId")(id)}
                     />
                     <DropdownField 
-                        label="your branch"
-                        floatingLabel="branch"
+                        label="your state"
+                        floatingLabel="state"
                         options={dropdownOptions.branches.map((b) => ({
                             id: b.branchId,
                             label: b.branchName,

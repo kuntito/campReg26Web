@@ -133,8 +133,8 @@ const CoordRegFormContent = ({
                         onSelect={(id) => handleRegDataChange("genderId")(id)}
                     />
                     <DropdownField 
-                        label="your branch"
-                        floatingLabel="branch"
+                        label="your state"
+                        floatingLabel="state"
                         options={dropdownOptions.branches.map((b) => ({
                             id: b.branchId,
                             label: b.branchName,
