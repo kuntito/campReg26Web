@@ -12,7 +12,9 @@ const RegFormActions = ({
     canRegister,
 }: Props) => {
     return (
-        <VStack>
+        <VStack
+            gap={1}
+        >
             <AppButton
                 onClick={handleRegisterCamper}
                 isDisabled={!canRegister}

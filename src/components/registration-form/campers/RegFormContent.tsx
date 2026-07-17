@@ -11,11 +11,19 @@ import { CamperDetailsReqBody } from "../../../apiClient/registerCamper/register
 import appToastConfig from "../../../config/toastConfig";
 import RegFormFooter from "./RegFormFooter";
 import { validateEmail } from "../../../util/validateEmail";
+import PhoneNumberInputField from "../input-fields/PhoneNumberInputField";
+import { validatePhoneNumber } from "../../../util/validatePhoneNumber";
+import { constructPhoneNumber } from "../../../util/constructPhoneNumber";
 
 
 interface Props {
     dropdownOptions: CampersRegDropdownOptions;
 }
+
+// FIXME this assumes the first country code is, 1,
+// in the database, 1 reps Nigeria's country code, +234, 
+// if that changes, this breaks.
+const DEFAULT_COUNTRY_CODE_ID = 1;
 
 const RegFormContent = ({
     dropdownOptions,
@@ -28,6 +36,8 @@ const RegFormContent = ({
         genderId: null,
         fellowshipId: null,
         unitId: null,
+        countryCodeId: DEFAULT_COUNTRY_CODE_ID, 
+        digitsPhoneNumber: "",
     });
 
     const isFormValid = 
@@ -37,7 +47,9 @@ const RegFormContent = ({
         regData.branchId !== null &&
         regData.genderId !== null &&
         regData.fellowshipId !== null &&
-        regData.unitId !== null;
+        regData.unitId !== null &&
+        regData.countryCodeId !== null &&
+        validatePhoneNumber(regData.digitsPhoneNumber);
 
 
     const handleRegDataChange = (
@@ -55,7 +67,24 @@ const RegFormContent = ({
     const handleRegisterCamper = () => {
         if (!isFormValid) return;
         if (isRegistering) return;
-        regCamper(regData as CamperDetailsReqBody);
+
+        const reqBody: CamperDetailsReqBody = {
+            firstName: regData.firstName,
+            lastName: regData.lastName,
+            email: regData.email,
+            genderId: regData.genderId!,
+            branchId: regData.branchId!,
+            fellowshipId: regData.fellowshipId!,
+            unitId: regData.unitId!,
+            phoneNumber: constructPhoneNumber(
+                regData.countryCodeId!,
+                dropdownOptions,
+                regData.digitsPhoneNumber
+            ),
+        }
+
+        
+        regCamper(reqBody);
     };
 
 
@@ -92,17 +121,19 @@ const RegFormContent = ({
 
     return (
         <VStack
-            gap={"32px"}
+            gap={"16px"}
             h={"100%"}
             justifyContent={"center"}
         >
             <VStack            
-                gap={"32px"}
+                gap={"24px"}
                 justifyContent={"center"}
                 opacity={isRegistering ? 0.5 : 1}
                 pointerEvents={isRegistering ? "none" : "auto"}
             >
-                <VStack>
+                <VStack
+                    gap={0}
+                >
                     <NameInputField
                         label={"first name"}
                         value={regData.firstName}
@@ -116,6 +147,20 @@ const RegFormContent = ({
                     <EmailInputField 
                         value={regData.email}
                         onValueChange={handleRegDataChange("email")}
+                    />
+                    <PhoneNumberInputField
+                        countryCodes={
+                            dropdownOptions.countryCodes.map((cc) => ({
+                                id: cc.countryCodeId,
+                                label: cc.countryCode,
+                            }))
+                        }
+                        selectedId={regData.countryCodeId ?? DEFAULT_COUNTRY_CODE_ID}
+                        onSelect={(id) => handleRegDataChange("countryCodeId")(id)}
+
+                        value={regData.digitsPhoneNumber}
+                        placeholder="8012345678"
+                        onValueChange={handleRegDataChange("digitsPhoneNumber")}
                     />
                 </VStack>
                 <VStack

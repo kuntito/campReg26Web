@@ -21,7 +21,7 @@ const textStyles = {
         fontWeight: "normal",
     },
     orion: {
-        fontSize: "16px",
+        fontSize: "15px",
         fontWeight: "normal",
     },
     hush: {

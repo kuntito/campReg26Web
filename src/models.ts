@@ -8,6 +8,9 @@ export interface RegistrationData {
     branchId: number | null;
     fellowshipId: number | null;
     unitId: number | null;
+    countryCodeId: number | null;
+    /** the digits after the country code */
+    digitsPhoneNumber: string;
 }
 
 

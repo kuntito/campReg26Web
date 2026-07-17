@@ -1,6 +1,6 @@
 import { StateCreator } from "zustand";
 import { yc26DataSource } from "../../apiClient/yc26DataSource";
-import { BranchApi, FellowshipApi, GenderApi, UnitApi } from "../../apiClient/getRegDropdowns/getRegDropdowns.types";
+import { BranchApi, CountryCodeApi, FellowshipApi, GenderApi, UnitApi } from "../../apiClient/getRegDropdowns/getRegDropdowns.types";
 
 
 export interface CampersRegDropdownOptions {
@@ -8,6 +8,7 @@ export interface CampersRegDropdownOptions {
     fellowships: FellowshipApi[];
     units: UnitApi[];
     genders: GenderApi[];
+    countryCodes: CountryCodeApi[];
 }
 
 
@@ -51,6 +52,7 @@ export const createCamperRegFormSlice: StateCreator<CampersRegFormSlice> = (
                     fellowships: res.fellowships,
                     units: res.units,
                     genders: res.genders,
+                    countryCodes: res.countryCodes
                 }
             }
         });

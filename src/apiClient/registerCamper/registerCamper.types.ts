@@ -6,6 +6,7 @@ export type CamperDetailsReqBody = {
     branchId: number;
     fellowshipId: number;
     unitId: number;
+    phoneNumber: string;
 };
 
 export type RegisteredCamperDetails = {

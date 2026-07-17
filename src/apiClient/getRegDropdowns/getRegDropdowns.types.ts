@@ -18,12 +18,18 @@ export interface GenderApi {
     genderName: string;
 }
 
+export interface CountryCodeApi {
+    countryCodeId: number;
+    countryCode: string;
+}
+
 interface GetRegDropdownsSuccess {
     success: true;
     genders: GenderApi[];
     branches: BranchApi[];
     fellowships: FellowshipApi[];
     units: UnitApi[];
+    countryCodes: CountryCodeApi[];
 }
 
 interface GetRegDropdownsFailure {
