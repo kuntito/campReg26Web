@@ -77,6 +77,8 @@ const ContentCamperProfile = () => {
                 } else {
                     return (
                         <AddPhoneNumberAction
+                            firstName={stateFetchCamperProfile.profile.firstName}
+                            lastName={stateFetchCamperProfile.profile.lastName}
                             camperId={stateFetchCamperProfile.profile.camperId}
                         />
                     );

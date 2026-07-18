@@ -17,6 +17,8 @@ type FormData = {
 
 interface Props {
     camperId: number;
+    firstName: string;
+    lastName: string;
 }
 
 // FIXME, i've hard-coded these values here
@@ -31,6 +33,8 @@ const countryCodes: CountryCodeApi[] = [
 
 const AddPhoneNumberAction = ({
     camperId,
+    firstName,
+    lastName,
 }: Props) => {
 
     const [regData, setRegData] = useState<FormData>({
@@ -76,6 +80,11 @@ const AddPhoneNumberAction = ({
 
     useEffect(() => {
         if (stateAddPhoneNumber.kind === 'success') {
+            toast({
+                ...appToastConfig,
+                description: "thank you! 😁",
+                status: "success"
+            })
             markPhoneNumberRegistered();
             resetAddPhoneNumberState();
         } else if (
@@ -97,6 +106,14 @@ const AddPhoneNumberAction = ({
             h={"100%"}
             justifyContent={"center"}
         >
+            <Text
+                color={"palette.room"}
+                textStyle={"orion"}
+                align={"start"}
+                textAlign={"center"}
+            >
+                hello 👋,<br></br>{firstName} {lastName}
+            </Text>
             <PhoneNumberInputField
                 countryCodes={
                     countryCodes.map((cc) => ({
