@@ -13,6 +13,7 @@ export interface CamperProfileSlice {
     stateFetchCamperProfile: CamperProfileStatus;
     fetchCamperProfile: (camperEmail: string) => Promise<void>;
     resetStateCamperProfile: () => void;
+    markPhoneNumberRegistered: () => void;
 }
 
 export const createCamperProfileSlice: StateCreator<CamperProfileSlice> = (set, get) => {
@@ -45,6 +46,28 @@ export const createCamperProfileSlice: StateCreator<CamperProfileSlice> = (set, 
         });
     };
 
+    /**
+     * this should be called after the camper's phone number
+     * has been saved.
+     * 
+     * it updates the local state indicating that the camper's data
+     * is missing phone number.
+     */
+    const markPhoneNumberRegistered = () => {
+        const current = get().stateFetchCamperProfile;
+        if (current.kind === 'success') {
+            set({
+                stateFetchCamperProfile: {
+                    kind: 'success',
+                    profile: {
+                        ...current.profile,
+                        isRegPhoneNumber: true,
+                    }
+                }
+            })
+        }
+    }
+
     const resetStateCamperProfile = () => {
         set({
             stateFetchCamperProfile: { 
@@ -57,5 +80,6 @@ export const createCamperProfileSlice: StateCreator<CamperProfileSlice> = (set, 
         stateFetchCamperProfile: defaultStatus,
         fetchCamperProfile,
         resetStateCamperProfile,
+        markPhoneNumberRegistered,
     };
 };

@@ -23,7 +23,7 @@ interface Props {
 // FIXME this assumes the first country code is, 1,
 // in the database, 1 reps Nigeria's country code, +234, 
 // if that changes, this breaks.
-const DEFAULT_COUNTRY_CODE_ID = 1;
+export const DEFAULT_COUNTRY_CODE_ID = 1;
 
 const RegFormContent = ({
     dropdownOptions,
@@ -78,7 +78,7 @@ const RegFormContent = ({
             unitId: regData.unitId!,
             phoneNumber: constructPhoneNumber(
                 regData.countryCodeId!,
-                dropdownOptions,
+                dropdownOptions.countryCodes,
                 regData.digitsPhoneNumber
             ),
         }

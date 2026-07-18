@@ -6,11 +6,13 @@ import LabelAndInput from "./LabelAndInput";
 
 interface Props {
     value: string;
+    label?: string;
     onValueChange: (newValue: string) => void;
 }
 
 const EmailInputField = ({
     value,
+    label = "email",
     onValueChange,
 }: Props) => {
 
@@ -35,7 +37,7 @@ const EmailInputField = ({
             position={"relative"}
         >
             <LabelAndInput 
-                label="email"
+                label={label}
                 placeholder="example@gmail.com"
                 value={value}
                 onChange={handleValueChange}

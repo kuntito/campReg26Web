@@ -7,6 +7,7 @@ import CenterSpinner from "../util/CenterSpinner";
 import appToastConfig from "../../config/toastConfig";
 import CamperProfileCard from "./CamperProfileCard";
 import { validateEmail } from "../../util/validateEmail";
+import AddPhoneNumberAction from "./AddPhoneNumberAction";
 
 const ContentCamperProfile = () => {
     const [regEmail, setRegEmail] = useState<string>("");
@@ -53,6 +54,7 @@ const ContentCamperProfile = () => {
                         justifyContent={"center"}
                     >
                         <EmailInputField 
+                        label={"registration email"}
                             value={regEmail}
                             onValueChange={setRegEmail}
                         />
@@ -67,9 +69,18 @@ const ContentCamperProfile = () => {
             case 'fetching':
                 return <CenterSpinner />;
             case 'success':
-                return (
-                    <CamperProfileCard profile={stateFetchCamperProfile.profile} />
-                );
+                const doWeHaveTheirPhoneNumber = stateFetchCamperProfile.profile.isRegPhoneNumber;
+                if (doWeHaveTheirPhoneNumber) {
+                    return (
+                        <CamperProfileCard profile={stateFetchCamperProfile.profile} />
+                    );
+                } else {
+                    return (
+                        <AddPhoneNumberAction
+                            camperId={stateFetchCamperProfile.profile.camperId}
+                        />
+                    );
+                }
             case 'error':
                 return null;
         }

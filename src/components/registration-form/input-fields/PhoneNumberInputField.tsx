@@ -47,7 +47,7 @@ const PhoneNumberInputField = ({
                 fontWeight={isFocused ? "medium" : "normal"}
                 color={"palette.room"}
             >
-                phone number
+                whatsapp phone number
             </Text>
             <HStack
                 gap={0}

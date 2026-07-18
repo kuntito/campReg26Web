@@ -5,6 +5,7 @@ import { CamperProfileSlice, createCamperProfileSlice } from "./slices/camperPro
 import { createCamperRegStatusSlice, CamperRegStatusSlice } from "./slices/regStatusSlice";
 import { createRegCoordSlice, RegCoordSlice } from "./slices/regCoordSlice";
 import { CoordRegFormSlice, createCoordRegFormSlice } from "./slices/coordinatorRegFormSlice";
+import { createAddPhoneNumberSlice, SliceAddPhoneNumber } from "./slices/sliceAddPhoneNumberSlice";
 
 
 type AppStore = 
@@ -13,7 +14,8 @@ type AppStore =
     & CamperProfileSlice
     & CamperRegStatusSlice
     & RegCoordSlice
-    & CoordRegFormSlice;
+    & CoordRegFormSlice
+    & SliceAddPhoneNumber;
 
 const useAppStore = create<AppStore>()(
     (...args) => {
@@ -23,6 +25,7 @@ const useAppStore = create<AppStore>()(
         const regStatusSlice = createCamperRegStatusSlice(...args);
         const regCoordSlice = createRegCoordSlice(...args);
         const coordRegFormSlice = createCoordRegFormSlice(...args);
+        const sliceAddPhoneNumber = createAddPhoneNumberSlice(...args);
         
         return {
             ...regFormSlice,
@@ -31,6 +34,7 @@ const useAppStore = create<AppStore>()(
             ...regStatusSlice,
             ...regCoordSlice,
             ...coordRegFormSlice,
+            ...sliceAddPhoneNumber,
         }
     }
 )

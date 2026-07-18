@@ -1,4 +1,4 @@
-import { CampersRegDropdownOptions } from "../state-mgmt/slices/regFormSlice";
+import { CountryCodeApi } from "../apiClient/getRegDropdowns/getRegDropdowns.types";
 
 /**
  * concats the country code with the phone number digits.
@@ -8,11 +8,11 @@ import { CampersRegDropdownOptions } from "../state-mgmt/slices/regFormSlice";
  */
 export const constructPhoneNumber = (
     countryCodeId: number,
-    dropdownOptions: CampersRegDropdownOptions,
+    countryCodes: CountryCodeApi[],
     digitsPhoneNumber: string,
 ): string => {
     
-    const item = dropdownOptions.countryCodes.find(
+    const item = countryCodes.find(
         cc => cc.countryCodeId === countryCodeId
     );
 
