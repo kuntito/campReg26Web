@@ -9,6 +9,7 @@ interface Props {
     selectedId: number;
     onSelect: (id: number) => void;
 
+    label?: string;
     value: string;
     onValueChange: (newValue: string) => void;
     placeholder: string;
@@ -20,6 +21,7 @@ const PhoneNumberInputField = ({
     onSelect,
     countryCodes,
 
+    label = "whatsapp phone number",
     value,
     onValueChange,
     placeholder,
@@ -47,7 +49,7 @@ const PhoneNumberInputField = ({
                 fontWeight={isFocused ? "medium" : "normal"}
                 color={"palette.room"}
             >
-                whatsapp phone number
+                {label}
             </Text>
             <HStack
                 gap={0}

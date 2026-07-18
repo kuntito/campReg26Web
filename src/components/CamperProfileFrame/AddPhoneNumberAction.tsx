@@ -107,6 +107,7 @@ const AddPhoneNumberAction = ({
                 selectedId={regData.countryCodeId ?? DEFAULT_COUNTRY_CODE_ID}
                 onSelect={(id) => handleRegDataChange("countryCodeId")(id)}
 
+                label={"we need your whatsapp number"}
                 value={regData.digitsPhoneNumber}
                 placeholder="8012345678"
                 onValueChange={handleRegDataChange("digitsPhoneNumber")}
