@@ -1,4 +1,5 @@
 import { envConfig } from "../config/envConfig";
+import { AddCamperPhoneNumberResponse, ReqBodyAddCamperPhoneNumber } from "./addCamperPhoneNumber/addCamperPhoneNumber.types";
 import { CamperProfileResponse } from "./getCamperProfile/getCamperProfile.types";
 import { GetCoordDropdownsResponse } from "./getRegDropdowns/getCoordinatorsDropdowns.types";
 import { GetRegDropdownsResponse } from "./getRegDropdowns/getRegDropdowns.types";
@@ -90,6 +91,23 @@ const yc26ApiClient = {
 
         return res.json();
     },
+    addPhoneNumber: async (
+        reqBody: ReqBodyAddCamperPhoneNumber,
+    ): Promise<AddCamperPhoneNumberResponse> => {
+        const url = `${BASE_URL}/api/yc26/add-phone-number`;
+        const res = await fetch (
+            url,
+            {
+                method: "PATCH",
+                headers: { 
+                    'ngrok-skip-browser-warning': 'true',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(reqBody)
+            }
+        )
+        return res.json();
+    }
 }
 
 export default yc26ApiClient;

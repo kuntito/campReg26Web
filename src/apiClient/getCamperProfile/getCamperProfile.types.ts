@@ -7,6 +7,7 @@ export type CamperProfile = {
     fellowshipName: string;
     unitName: string;
     unitDutiesMdText: string | null;
+    isRegPhoneNumber: boolean;
 };
 
 export type CamperProfileResponse =

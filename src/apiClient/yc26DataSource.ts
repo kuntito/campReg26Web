@@ -1,3 +1,4 @@
+import { ReqBodyAddCamperPhoneNumber } from "./addCamperPhoneNumber/addCamperPhoneNumber.types";
 import { safeApiCall } from "./helpers";
 import { CamperDetailsReqBody } from "./registerCamper/registerCamper.types";
 import { CoordDetailsReqBody } from "./registerCoordinator/registerCoordinator.types";
@@ -27,5 +28,9 @@ export const yc26DataSource = {
     getCamperProfile: (camperEmail: string) => safeApiCall(
         () => yc26ApiClient.getCamperProfile(camperEmail),
         "gets a campers profile by email lookup"
+    ),
+    addPhoneNumber: (reqBody: ReqBodyAddCamperPhoneNumber) => safeApiCall(
+        () => yc26ApiClient.addPhoneNumber(reqBody),
+        "adds phone number to campers info"
     )
 };
