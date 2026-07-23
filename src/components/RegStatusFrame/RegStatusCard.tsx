@@ -12,46 +12,64 @@ const RegStatusCard = ({
     const entries = Object.entries(regCountPerBranch)
         .sort((a, b) => b[1] - a[1]);
 
+    const totalRegistered = Object.values(regCountPerBranch)
+        .reduce((sum, count) => sum + count, 0);
+
     return (
         <Center
             w={"100%"}
             h={"100%"}
         >
             <VStack
-                borderRadius={"16px"}
-                gap={0}
-                overflow={"hidden"}
+                gap={"16px"}
             >
-                {entries.map(([branch, count]) => (
-                    <HStack
-                        key={branch}
-                        gap={0}
-                    >
-                        <Box 
-                            bg={"palette.room"}
-                            width={"80px"}
-                            pl={"8px"}
+                <Text
+                    animation="blink 0.7s ease-in-out infinite alternate"
+                    sx={{
+                        "@keyframes blink": {
+                            "from": { opacity: 0.85 },
+                            "to": { opacity: 0.2 },
+                        }
+                    }}
+                >
+                    {totalRegistered} registered
+                </Text>
+                <VStack
+                    borderRadius={"16px"}
+                    gap={0}
+                    overflow={"hidden"}
+                >
+                    {entries.map(([branch, count]) => (
+                        <HStack
+                            key={branch}
+                            gap={0}
                         >
-                            <Text
-                                color={"palette.life"}
+                            <Box 
+                                bg={"palette.room"}
+                                width={"80px"}
+                                pl={"8px"}
                             >
-                                {branch}
-                            </Text>
-                        </Box>
-                        <Box 
-                            width={"120px"}
-                            bg={"palette.life"}
-                            justifyItems={"center"}
-                            borderWidth={"0.5px"}
-                        >
-                            <Text
-                                color={"palette.room"}
+                                <Text
+                                    color={"palette.life"}
+                                >
+                                    {branch}
+                                </Text>
+                            </Box>
+                            <Box 
+                                width={"120px"}
+                                bg={"palette.life"}
+                                justifyItems={"center"}
+                                borderWidth={"0.5px"}
                             >
-                                {count}
-                            </Text>
-                        </Box>
-                    </HStack>
-                ))}
+                                <Text
+                                    color={"palette.room"}
+                                >
+                                    {count}
+                                </Text>
+                            </Box>
+                        </HStack>
+                    ))}
+                </VStack>
             </VStack>
         </Center>
     );
