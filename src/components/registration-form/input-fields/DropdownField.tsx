@@ -11,7 +11,7 @@ interface Props {
     floatingLabel: string;
     options: DropdownOption[];
     selectedId: number | null;
-    onSelect: (id: number) => void;
+    onSelect: (id: number | null) => void;
 }
 
 const DropdownField = ({
@@ -33,7 +33,12 @@ const DropdownField = ({
                 placeholder={label}
                 value={selectedId ?? ""}
                 onChange={(e) => {
-                    onSelect(Number(e.target.value))
+                    const val = e.target.value;
+                    if (val === "") {
+                        onSelect(null)
+                    } else {
+                        onSelect(Number(val))
+                    }
                     e.target.blur();
                 }}
                 bg={"palette.lifeAlpha"}
