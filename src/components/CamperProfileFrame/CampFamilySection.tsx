@@ -1,7 +1,17 @@
 import { VStack, Text } from "@chakra-ui/react"
 import ComingSoonText from "./ComingSoonText"
+import MarkdownContent from "../util/MarkdownContent";
 
-const CampFamilySection = () => {
+interface Props {
+    familyName: string | null,
+    familyInfoMdText: string | null,
+}
+
+const CampFamilySection = ({
+    familyName,
+    familyInfoMdText
+}: Props) => {
+    const hasFamilyData = familyName != null && familyInfoMdText != null;
     return (
         <VStack
             gap={"4px"}
@@ -12,9 +22,25 @@ const CampFamilySection = () => {
                 color={"palette.room"}
                 fontWeight={"medium"}
             >
-                Camp Family
+                Camp Family{hasFamilyData && ` - ${familyName}`}
             </Text>
-            <ComingSoonText />
+            {hasFamilyData && (
+                <VStack
+                    alignItems={"start"}
+                >
+                    <Text>
+                        as part of this family, you're expected to learn about the life of {familyName}.
+                        <br/>
+                        <br/>
+                        
+                        to guide your study, focus on:
+                    </Text>
+                    <MarkdownContent>
+                        {familyInfoMdText}
+                    </MarkdownContent>
+                </VStack>
+            )}
+            {!hasFamilyData && <ComingSoonText /> }
         </VStack>
     )
 }

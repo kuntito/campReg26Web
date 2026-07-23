@@ -27,7 +27,10 @@ const CamperProfileCard = ({
             >
                 <UnitSection unitDutiesMdText={profile.unitDutiesMdText} />
                 <RoomSection />
-                <CampFamilySection />
+                <CampFamilySection
+                    familyName={profile.familyName}
+                    familyInfoMdText={profile.familyInfoMdText}
+                />
             </VStack>
 
         </VStack>
