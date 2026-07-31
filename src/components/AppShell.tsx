@@ -23,7 +23,11 @@ type CamperName = {
     lastName: string;
 }
 
-// TODO start here, write the dialog for successful coordinator registration.
+// TODO, do an npm run build, something breaks.
+// i'm in the middle of adding a branch for coordinator camp profile.
+// i've tweaked both api code and frontend code.
+
+// TODO write the dialog for successful coordinator registration.
 const AppShell = ({
     children
 }: Props) => {

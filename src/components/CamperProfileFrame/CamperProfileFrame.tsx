@@ -1,13 +1,18 @@
 import { VStack, Text, Box } from "@chakra-ui/react"
 import HeaderCamperProfile from "./HeaderCamperProfile"
 import ContentCamperProfile from "./ContentCamperProfile"
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
 
 interface Props {
 
 }
 
 const CamperProfileFrame = () => {
+    const location = useLocation();
+    const backLink = location.pathname.includes("coord") 
+        ? "/reg-coordinator" 
+        : "/";
+        
     return (
         <VStack
             gap={0}
@@ -25,7 +30,7 @@ const CamperProfileFrame = () => {
                 <ContentCamperProfile />
             </Box>
             <Link
-                to={"/"}
+                to={backLink}
             >
                 <Text
                     textStyle={"orion"}

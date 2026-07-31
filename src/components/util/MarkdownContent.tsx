@@ -3,13 +3,16 @@ import Markdown from "react-markdown";
 
 interface Props {
     children: string;
+    color?: string;
 }
 
 const MarkdownContent = ({
-    children: mdText
+    children: mdText,
+    color,
 }: Props) => {
     return (
         <Box
+            color={color}
             sx={{
                 h3: {
                     fontSize: "16px",

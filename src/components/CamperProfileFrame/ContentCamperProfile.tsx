@@ -8,6 +8,7 @@ import appToastConfig from "../../config/toastConfig";
 import CamperProfileCard from "./CamperProfileCard";
 import { validateEmail } from "../../util/validateEmail";
 import AddPhoneNumberAction from "./AddPhoneNumberAction";
+import ComingSoonText from "./ComingSoonText";
 
 const ContentCamperProfile = () => {
     const [regEmail, setRegEmail] = useState<string>("");
@@ -69,19 +70,25 @@ const ContentCamperProfile = () => {
             case 'fetching':
                 return <CenterSpinner />;
             case 'success':
-                const doWeHaveTheirPhoneNumber = stateFetchCamperProfile.profile.isRegPhoneNumber;
-                if (doWeHaveTheirPhoneNumber) {
-                    return (
-                        <CamperProfileCard profile={stateFetchCamperProfile.profile} />
-                    );
+                if (stateFetchCamperProfile.type === 'camper') {
+                    const doWeHaveTheirPhoneNumber = stateFetchCamperProfile.profile.isRegPhoneNumber;
+                    if (doWeHaveTheirPhoneNumber) {
+                        return (
+                            <CamperProfileCard profile={stateFetchCamperProfile.profile} />
+                        );
+                    } else {
+                        return (
+                            <AddPhoneNumberAction
+                                firstName={stateFetchCamperProfile.profile.firstName}
+                                lastName={stateFetchCamperProfile.profile.lastName}
+                                camperId={stateFetchCamperProfile.profile.camperId}
+                            />
+                        );
+                    }
+    
                 } else {
-                    return (
-                        <AddPhoneNumberAction
-                            firstName={stateFetchCamperProfile.profile.firstName}
-                            lastName={stateFetchCamperProfile.profile.lastName}
-                            camperId={stateFetchCamperProfile.profile.camperId}
-                        />
-                    );
+                    // TODO, here's where the coordinator details go to
+                    return <ComingSoonText />
                 }
             case 'error':
                 return null;

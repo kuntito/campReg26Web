@@ -1,6 +1,7 @@
-import { Center } from "@chakra-ui/react";
+import { Text, Center, VStack } from "@chakra-ui/react";
 import AppButton from "../../util/AppButton";
 import RegisteringBadge from "../campers/RegisteringBadge";
+import { Link } from "react-router-dom";
 
 interface Props {
     isRegistering: boolean;
@@ -17,18 +18,34 @@ const CoordRegFormFooter = ({
     return (
         <Center
             w={"100%"}
-        >
-            {
-                isRegistering ? 
-                <RegisteringBadge />
-                :
-                <AppButton
-                    onClick={handleRegisterCoord}
-                    isDisabled={!canRegister}
+        >   
+            <VStack
+                gap={"16px"}
+            >
+                {
+                    isRegistering ? 
+                    <RegisteringBadge />
+                    :
+                    <AppButton
+                        onClick={handleRegisterCoord}
+                        isDisabled={!canRegister}
+                    >
+                        register
+                    </AppButton>
+                }
+                <Link
+                    to={"/coord/my-details"}
                 >
-                    register
-                </AppButton>
-            }
+                    <Text
+                        textStyle={"orion"}
+                        color={"palette.room"}
+                        textDecoration={"underline"}
+                    >
+
+                        i've registered
+                    </Text>
+                </Link>
+            </VStack>
         </Center>
     )
 }

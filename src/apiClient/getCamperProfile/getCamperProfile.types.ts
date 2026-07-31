@@ -14,9 +14,14 @@ export type CamperProfile = {
 
 export type CamperProfileResponse =
     | {
-          success: true;
-          profile: CamperProfile;
-      }
+        success: true;
+        type: 'camper';
+        profile: CamperProfile;
+    }
+    | {
+        success: true;
+        type: 'coordinator';
+    }
     | {
           success: false;
           clientMessage?: string;

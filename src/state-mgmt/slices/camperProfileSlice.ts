@@ -5,7 +5,15 @@ import { yc26DataSource } from "../../apiClient/yc26DataSource";
 export type CamperProfileStatus =
     | { kind: 'idle' }
     | { kind: 'fetching' }
-    | { kind: 'success', profile: CamperProfile }
+    | { 
+        kind: 'success', 
+        type: 'camper',
+        profile: CamperProfile 
+    }
+    | { 
+        kind: 'success', 
+        type: 'coordinator',
+    }
     | { kind: 'error', reason: string }
 
     
@@ -38,12 +46,22 @@ export const createCamperProfileSlice: StateCreator<CamperProfileSlice> = (set, 
             return;
         }
 
-        set({
-            stateFetchCamperProfile: {
-                kind: 'success',
-                profile: res.profile
-            }
-        });
+        if (res.type === 'camper') {
+            set({
+                stateFetchCamperProfile: {
+                    kind: 'success',
+                    type: 'camper',
+                    profile: res.profile
+                }
+            });
+        } else {
+            set({
+                stateFetchCamperProfile: {
+                    kind: 'success',
+                    type: 'coordinator',
+                }
+            });
+        }
     };
 
     /**
@@ -55,10 +73,11 @@ export const createCamperProfileSlice: StateCreator<CamperProfileSlice> = (set, 
      */
     const markPhoneNumberRegistered = () => {
         const current = get().stateFetchCamperProfile;
-        if (current.kind === 'success') {
+        if (current.kind === 'success' && current.type === 'camper') {
             set({
                 stateFetchCamperProfile: {
                     kind: 'success',
+                    type: 'camper',
                     profile: {
                         ...current.profile,
                         isRegPhoneNumber: true,

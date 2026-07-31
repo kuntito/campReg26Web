@@ -12,6 +12,7 @@ const appScreenRouter = createBrowserRouter([
         children: [
             { index: true, element: <RegistrationScreen /> },
             { path: "/my-details", element: <MyDetailsScreen /> },
+            { path: "coord/my-details", element: <MyDetailsScreen /> },
             { path: "/reg-status", element: <RegStatusScreen /> },
             { path: "/reg-coordinator", element: <RegCoordinatorsScreen />}
         ]
