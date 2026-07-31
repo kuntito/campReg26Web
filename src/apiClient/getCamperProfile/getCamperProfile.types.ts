@@ -12,6 +12,16 @@ export type CamperProfile = {
     familyInfoMdText: string | null;
 };
 
+
+export type CoordinatorProfile = {
+    coordinatorId: number;
+    firstName: string;
+    lastName: string;
+    familyName: string | null;
+    familyInfoMdText: string | null;
+}
+
+
 export type CamperProfileResponse =
     | {
         success: true;
@@ -21,6 +31,7 @@ export type CamperProfileResponse =
     | {
         success: true;
         type: 'coordinator';
+        details: CoordinatorProfile;
     }
     | {
           success: false;

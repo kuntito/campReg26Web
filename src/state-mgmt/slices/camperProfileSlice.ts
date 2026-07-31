@@ -1,5 +1,5 @@
 import { StateCreator } from "zustand";
-import { CamperProfile } from "../../apiClient/getCamperProfile/getCamperProfile.types";
+import { CamperProfile, CoordinatorProfile } from "../../apiClient/getCamperProfile/getCamperProfile.types";
 import { yc26DataSource } from "../../apiClient/yc26DataSource";
 
 export type CamperProfileStatus =
@@ -13,6 +13,7 @@ export type CamperProfileStatus =
     | { 
         kind: 'success', 
         type: 'coordinator',
+        profile: CoordinatorProfile,
     }
     | { kind: 'error', reason: string }
 
@@ -59,6 +60,7 @@ export const createCamperProfileSlice: StateCreator<CamperProfileSlice> = (set, 
                 stateFetchCamperProfile: {
                     kind: 'success',
                     type: 'coordinator',
+                    profile: res.details,
                 }
             });
         }

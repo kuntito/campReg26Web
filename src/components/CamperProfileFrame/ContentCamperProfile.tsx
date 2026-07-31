@@ -1,4 +1,4 @@
-import { useToast, VStack } from "@chakra-ui/react"
+import { Text, Center, useToast, VStack } from "@chakra-ui/react"
 import EmailInputField from "../registration-form/input-fields/EmailInputField"
 import { useEffect, useState } from "react"
 import AppButton from "../util/AppButton";
@@ -9,6 +9,7 @@ import CamperProfileCard from "./CamperProfileCard";
 import { validateEmail } from "../../util/validateEmail";
 import AddPhoneNumberAction from "./AddPhoneNumberAction";
 import ComingSoonText from "./ComingSoonText";
+import { CardCoordinatorInfo } from "../CardCoordinatorInfo";
 
 const ContentCamperProfile = () => {
     const [regEmail, setRegEmail] = useState<string>("");
@@ -87,8 +88,15 @@ const ContentCamperProfile = () => {
                     }
     
                 } else {
-                    // TODO, here's where the coordinator details go to
-                    return <ComingSoonText />
+                    const coordProfile = stateFetchCamperProfile.profile;
+                    const nameCoordinator = `${coordProfile.firstName} ${coordProfile.lastName}`;
+                    return (
+                        <CardCoordinatorInfo 
+                            nameCoordinator={nameCoordinator}
+                            familyName={coordProfile.familyName}
+                            familyInfoMdText={coordProfile.familyInfoMdText}
+                        />
+                    )
                 }
             case 'error':
                 return null;

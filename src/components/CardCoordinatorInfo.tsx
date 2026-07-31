@@ -57,7 +57,7 @@ export const CardCoordinatorInfo = ({
                             </Text>.
                         </Text>
                         <Text>
-                            you're expected to learn about the life of {familyName}.
+                            as a coordinator, you're also expected to learn about the life of {familyName}.
                             <br/>
                             <br/>
                             

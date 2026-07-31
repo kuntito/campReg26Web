@@ -45,7 +45,7 @@ const AppShell = ({
         setRegisteredCamperName
     ] = useState<CamperName | null>(null);
 
-    const dialog_dismiss_timeout_ms = 5000;
+    const dialog_dismiss_timeout_ms = 3000;
 
     useEffect(() => {
         if (regCamperStatus.kind === 'success') {
@@ -70,6 +70,8 @@ const AppShell = ({
                 firstName,
                 lastName
             });
+            fetchCamperProfile(regCoordState.registeredCoordDetails.email);
+            navigateTo("/my-details");
 
             resetRegCoordState();
             setTimeout(() => {

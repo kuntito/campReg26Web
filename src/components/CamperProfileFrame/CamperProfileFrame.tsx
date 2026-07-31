@@ -2,6 +2,7 @@ import { VStack, Text, Box } from "@chakra-ui/react"
 import HeaderCamperProfile from "./HeaderCamperProfile"
 import ContentCamperProfile from "./ContentCamperProfile"
 import { Link, useLocation } from "react-router-dom"
+import useAppStore from "../../state-mgmt/appStore"
 
 interface Props {
 
@@ -12,6 +13,8 @@ const CamperProfileFrame = () => {
     const backLink = location.pathname.includes("coord") 
         ? "/reg-coordinator" 
         : "/";
+
+    const resetStateCamperProfile = useAppStore(s => s.resetStateCamperProfile);
         
     return (
         <VStack
@@ -25,12 +28,15 @@ const CamperProfileFrame = () => {
                 w="100%"
                 px={"16px"}
                 py={"24px"}
+                justifyItems={"center"}
+                alignContent={"center"}
             >
 
                 <ContentCamperProfile />
             </Box>
             <Link
                 to={backLink}
+                onClick={resetStateCamperProfile}
             >
                 <Text
                     textStyle={"orion"}
