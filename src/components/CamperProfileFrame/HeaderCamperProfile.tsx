@@ -25,7 +25,7 @@ const HeaderCamperProfile = () => {
                         color={"palette.life"}
                         textStyle={"blaze"}
                     >
-                        Youth Camp '26'
+                        Youth Camp '26
                     </Text>
                     <VStack
                         pt={"6px"}
