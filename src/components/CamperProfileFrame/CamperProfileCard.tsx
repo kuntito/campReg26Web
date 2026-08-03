@@ -25,11 +25,14 @@ const CamperProfileCard = ({
                 alignItems={"start"}
                 divider={<Divider borderColor="palette.skylar" />}
             >
-                <UnitSection unitDutiesMdText={profile.unitDutiesMdText} />
-                <RoomSection />
                 <CampFamilySection
                     familyName={profile.familyName}
                     familyInfoMdText={profile.familyInfoMdText}
+                />
+                <RoomSection />
+                <UnitSection
+                    unitDutiesMdText={profile.unitDutiesMdText}
+                    unitGroupChatLink={profile.unitGroupChatLink}
                 />
             </VStack>
 

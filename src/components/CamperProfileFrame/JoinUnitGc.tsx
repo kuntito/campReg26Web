@@ -10,14 +10,14 @@ const JoinUnitGc = ({
     link
 }: Props) => {
     return (
-        <a
-            href={link}
-            target="_blank"
-            rel="noopener noreferrer"
+        <VStack
+            gap={"2px"}
+            w={"100%"}
         >
-            <VStack
-                gap={"2px"}
-                w={"100%"}
+            <a
+                href={link}
+                target="_blank"
+                rel="noopener noreferrer"
             >
                 <HStack
                     bg={"palette.raze"}
@@ -43,14 +43,14 @@ const JoinUnitGc = ({
                         join the group
                     </Text>
                 </HStack>
-                <Text
-                    color={"palette.skylar"}
-                    textStyle={"hush"}
-                >
-                    stay updated
-                </Text>
-            </VStack>
-        </a>
+            </a>
+            <Text
+                color={"palette.skylar"}
+                textStyle={"hush"}
+            >
+                stay updated
+            </Text>
+        </VStack>
     )
 }
 
