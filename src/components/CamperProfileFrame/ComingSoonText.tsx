@@ -14,7 +14,7 @@ const ComingSoonText = () => {
                 }
             }}
         >
-            coming soon...
+            on the way...
         </Text>
     )
 }
